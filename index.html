@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shree Harikrishna Supermart</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f8fa;
+      color: #222;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .cart {
+      background: #16a34a;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    /* Hero */
+    .hero {
+      margin: 18px;
+      padding: 28px 20px;
+      border-radius: 18px;
+      background: #e9f8ee;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .shop-btn {
+      display: inline-block;
+      background: #16a34a;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Search */
+    .search-box {
+      margin: 18px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    /* Categories */
+    .section {
+      padding: 10px 18px 20px;
+    }
+
+    .section h2 {
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .category-icon {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .category h3 {
+      font-size: 16px;
+    }
+
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 15px;
+      padding: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .product-image {
+      height: 110px;
+      background: #f0f2f4;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .price {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .add-btn {
+      width: 100%;
+      border: none;
+      background: #16a34a;
+      color: white;
+      padding: 9px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Delivery */
+    .delivery {
+      margin: 5px 18px 25px;
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .delivery h2 {
+      margin-bottom: 8px;
+    }
+
+    .delivery p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: white;
+      padding: 25px 18px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 7px 0;
+      color: #d1d5db;
+    }
+
+    @media (min-width: 700px) {
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .hero,
+      .search-box,
+      .section,
+      .delivery {
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <div class="logo">🏪 Shree Harikrishna Supermart</div>
+      <div class="cart">🛒 Cart <span id="cartCount">0</span></div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Your Local Supermart 🛒</h1>
+    <p>
+      Grocery, Dairy & Bakery products delivered to your doorstep.
+    </p>
+
+    <a href="#products" class="shop-btn">
+      Shop Now
+    </a>
+  </section>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="🔎 Search grocery, dairy, bakery..."
+    >
+  </div>
+
+  <!-- Categories -->
+  <section class="section">
+    <h2>Shop by Category</h2>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="category-icon">🥛</div>
+        <h3>Dairy</h3>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🛒</div>
+        <h3>Grocery</h3>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🍞</div>
+        <h3>Bakery</h3>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🥤</div>
+        <h3>Beverages</h3>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="products">
+    <h2>Popular Products</h2>
+
+    <div class="products">
+
+      <div class="product">
+        <div class="product-image">🥛</div>
+        <h3>Amul Milk</h3>
+        <div class="price">₹30</div>
+        <button class="add-btn" onclick="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-image">🍞</div>
+        <h3>Fresh Bread</h3>
+        <div class="price">₹40</div>
+        <button class="add-btn" onclick="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-image">🧈</div>
+        <h3>Amul Butter</h3>
+        <div class="price">₹60</div>
+        <button class="add-btn" onclick="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product">
+        <div class="product-image">🍪</div>
+        <h3>Biscuits</h3>
+        <div class="price">₹20</div>
+        <button class="add-btn" onclick="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Delivery -->
+  <section class="delivery">
+    <h2>🚴 Home Delivery</h2>
+
+    <p>
+      Order your daily essentials online and get them delivered
+      to your doorstep.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h3>Shree Harikrishna Supermart</h3>
+    <p>Grocery • Dairy • Bakery</p>
+    <p>📍 Surat, Gujarat</p>
+    <p>📞 Contact us for orders</p>
+  </footer>
+
+  <script>
+    let cartCount = 0;
+
+    function addToCart() {
+      cartCount++;
+      document.getElementById("cartCount").innerText = cartCount;
+    }
+  </script>
+
+</body>
+</html>
