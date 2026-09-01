@@ -27,6 +27,9 @@ button {
   --orange: #ff6b00;
   --orange-dark: #e85d00;
   --orange-light: #fff1e6;
+  --orange-soft: #fff7f0;
+  --orange-border: #ffd2b3;
+
   --white: #ffffff;
   --text: #222222;
   --muted: #777777;
@@ -1177,3 +1180,105 @@ footer {
   }
 
   }
+/* ================= ORANGE THEME OVERRIDE ================= */
+
+:root {
+  --orange: #ff6b00;
+  --orange-dark: #e85d00;
+  --orange-light: #fff1e6;
+  --orange-soft: #fff7f0;
+  --orange-border: #ffd2b3;
+}
+
+/* Buttons */
+.cart-btn,
+.shop-btn,
+.checkout-btn {
+  background: var(--orange) !important;
+}
+
+.cart-btn:hover,
+.shop-btn:hover,
+.checkout-btn:hover {
+  background: var(--orange-dark) !important;
+}
+
+/* Cart count */
+.cart-btn b {
+  color: var(--orange) !important;
+}
+
+/* Links & headings */
+.section-heading button,
+.small-title {
+  color: var(--orange) !important;
+}
+
+/* Category backgrounds */
+.category-image,
+.delivery-item > span {
+  background: var(--orange-light) !important;
+}
+
+/* Product image background */
+.product-image {
+  background: var(--orange-soft) !important;
+}
+
+/* Discount */
+.discount {
+  background: var(--orange) !important;
+}
+
+/* Product ADD button */
+.product-bottom button {
+  color: var(--orange) !important;
+  border-color: var(--orange) !important;
+}
+
+.product-bottom button:hover {
+  background: var(--orange) !important;
+  color: #ffffff !important;
+}
+
+/* Quantity controls */
+.quantity button {
+  color: var(--orange) !important;
+  border-color: var(--orange) !important;
+}
+
+.quantity button:hover {
+  background: var(--orange-light) !important;
+}
+
+/* Cart total */
+.cart-total strong {
+  color: var(--orange) !important;
+}
+
+/* Search focus */
+.search-box:focus-within {
+  border-color: var(--orange-border) !important;
+  box-shadow: 0 0 0 3px var(--orange-light) !important;
+}
+
+/* Offer banner */
+.offer-banner {
+  background: linear-gradient(
+    135deg,
+    #ff6b00,
+    #ff8533
+  ) !important;
+}
+
+/* Location badge */
+.location {
+  background: var(--orange-light) !important;
+  color: var(--orange-dark) !important;
+}
+
+/* Orange borders */
+.product-bottom button,
+.quantity button {
+  border-color: var(--orange) !important;
+}
