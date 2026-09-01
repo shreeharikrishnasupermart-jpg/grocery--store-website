@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shree Harikrishna Supermart</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f7f7f7;
+    color:#222;
+    padding-bottom:75px;
+}
+
+button{
+    font-family:inherit;
+}
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:0 16px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+
+.header-main{
+    max-width:1200px;
+    margin:auto;
+    padding:12px 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#fff1e6;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+}
+
+.brand-name{
+    font-size:18px;
+    font-weight:800;
+}
+
+.brand-name span{
+    color:#f97316;
+}
+
+.cart-button{
+    border:none;
+    background:#f97316;
+    color:white;
+
+    padding:10px 14px;
+    border-radius:12px;
+
+    font-size:14px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.cart-button span{
+    margin-left:3px;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.location{
+    background:#fff;
+    border-top:1px solid #f0f0f0;
+    padding:8px 16px;
+
+    font-size:13px;
+    color:#555;
+}
+
+.location-inner{
+    max-width:1200px;
+    margin:auto;
+}
+
+.location strong{
+    color:#222;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-area{
+    background:white;
+    padding:14px 16px;
+}
+
+.search{
+    max-width:1200px;
+    margin:auto;
+
+    position:relative;
+}
+
+.search input{
+    width:100%;
+    height:48px;
+
+    border:1px solid #ddd;
+    border-radius:12px;
+
+    padding:0 15px 0 45px;
+
+    font-size:15px;
+    outline:none;
+
+    background:#fafafa;
+}
+
+.search input:focus{
+    border-color:#f97316;
+    background:white;
+}
+
+.search-icon{
+    position:absolute;
+    left:15px;
+    top:13px;
+
+    font-size:20px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    max-width:1200px;
+    margin:16px auto;
+    padding:0 16px;
+}
+
+.hero-box{
+    min-height:210px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #fff0e5,
+            #fff8f3
+        );
+
+    padding:28px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero-tag{
+    display:inline-block;
+
+    background:#f97316;
+    color:white;
+
+    padding:6px 10px;
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:bold;
+
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-size:32px;
+    line-height:1.15;
+    margin-bottom:10px;
+}
+
+.hero h1 span{
+    color:#f97316;
+}
+
+.hero p{
+    color:#555;
+    line-height:1.5;
+    margin-bottom:18px;
+}
+
+.shop-btn{
+    border:none;
+    background:#f97316;
+    color:white;
+
+    padding:12px 20px;
+    border-radius:10px;
+
+    font-weight:bold;
+    font-size:15px;
+
+    cursor:pointer;
+}
+
+.hero-icon{
+    font-size:95px;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    max-width:1200px;
+    margin:28px auto;
+    padding:0 16px;
+}
+
+.section-title{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+
+    margin-bottom:15px;
+}
+
+.section-title h2{
+    font-size:23px;
+}
+
+.section-title small{
+    color:#f97316;
+    font-weight:bold;
+}
+
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.categories{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.category{
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.06);
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.category:active{
+    transform:scale(.97);
+}
+
+.category-image{
+    height:130px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:65px;
+}
+
+.cat-grocery{
+    background:#fff4df;
+}
+
+.cat-dairy{
+    background:#fff0e8;
+}
+
+.cat-bakery{
+    background:#fff5df;
+}
+
+.cat-snacks{
+    background:#ffeef0;
+}
+
+.cat-drinks{
+    background:#e9f7ff;
+}
+
+.cat-household{
+    background:#f2edff;
+}
+
+.category-name{
+    padding:13px 8px;
+
+    text-align:center;
+
+    font-size:16px;
+    font-weight:800;
+}
+
+
+/* =========================
+   QUICK CATEGORIES
+========================= */
+
+.quick-scroll{
+    display:flex;
+    gap:12px;
+
+    overflow-x:auto;
+
+    padding-bottom:5px;
+}
+
+.quick-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+.quick{
+    min-width:90px;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:12px 8px;
+
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.quick-icon{
+    font-size:32px;
+    margin-bottom:6px;
+}
+
+.quick p{
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.product{
+    background:white;
+
+    border-radius:16px;
+
+    padding:10px;
+
+    position:relative;
+
+    box-shadow:
+        0 2px 9px rgba(0,0,0,.06);
+}
+
+.discount{
+    position:absolute;
+
+    top:9px;
+    left:9px;
+
+    background:#f97316;
+    color:white;
+
+    padding:4px 6px;
+
+    border-radius:5px;
+
+    font-size:10px;
+    font-weight:bold;
+}
+
+.product-img{
+    height:135px;
+
+    border-radius:12px;
+
+    background:#fff7ed;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:62px;
+
+    margin-bottom:10px;
+}
+
+.product-name{
+    font-size:14px;
+    font-weight:700;
+
+    line-height:1.3;
+
+    min-height:37px;
+}
+
+.product-qty{
+    color:#777;
+    font-size:12px;
+
+    margin:5px 0;
+}
+
+.product-bottom{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:6px;
+}
+
+.price{
+    font-size:16px;
+    font-weight:800;
+}
+
+.mrp{
+    color:#999;
+    font-size:11px;
+
+    text-decoration:line-through;
+
+    margin-left:4px;
+}
+
+.add{
+    border:1px solid #f97316;
+
+    background:#fff;
+
+    color:#f97316;
+
+    padding:7px 13px;
+
+    border-radius:8px;
+
+    font-weight:800;
+    font-size:12px;
+
+    cursor:pointer;
+}
+
+.add:hover{
+    background:#f97316;
+    color:white;
+}
+
+
+/* =========================
+   OFFER BANNER
+========================= */
+
+.offer{
+    max-width:1200px;
+
+    margin:28px auto;
+
+    padding:0 16px;
+}
+
+.offer-box{
+    background:#f97316;
+
+    color:white;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.offer h2{
+    font-size:21px;
+    margin-bottom:5px;
+}
+
+.offer p{
+    font-size:13px;
+}
+
+.offer-icon{
+    font-size:55px;
+}
+
+
+/* =========================
+   DELIVERY
+========================= */
+
+.delivery{
+    max-width:1200px;
+
+    margin:25px auto;
+
+    padding:0 16px;
+}
+
+.delivery-box{
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.05);
+}
+
+.delivery-box h2{
+    margin-bottom:10px;
+}
+
+.delivery-box p{
+    color:#666;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.delivery-features{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.feature{
+    text-align:center;
+
+    background:#fff7ed;
+
+    padding:12px 5px;
+
+    border-radius:12px;
+}
+
+.feature-icon{
+    font-size:25px;
+}
+
+.feature p{
+    font-size:11px;
+    margin-top:5px;
+    color:#333;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#222;
+
+    color:white;
+
+    padding:30px 16px;
+
+    text-align:center;
+
+    margin-top:35px;
+}
+
+footer h3{
+    margin-bottom:8px;
+}
+
+footer p{
+    color:#bbb;
+
+    font-size:13px;
+
+    margin:6px 0;
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:65px;
+
+    background:white;
+
+    box-shadow:
+        0 -2px 12px rgba(0,0,0,.12);
+
+    display:flex;
+
+    justify-content:space-around;
+    align-items:center;
+
+    z-index:2000;
+}
+
+.nav-item{
+    text-align:center;
+
+    color:#666;
+
+    font-size:11px;
+
+    cursor:pointer;
+}
+
+.nav-item.active{
+    color:#f97316;
+    font-weight:bold;
+}
+
+.nav-icon{
+    font-size:22px;
+    display:block;
+    margin-bottom:2px;
+}
+
+
+/* =========================
+   CART POPUP
+========================= */
+
+.cart-panel{
+    position:fixed;
+
+    right:15px;
+    bottom:75px;
+
+    width:300px;
+
+    max-width:calc(100% - 30px);
+
+    background:white;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 5px 30px rgba(0,0,0,.2);
+
+    padding:18px;
+
+    z-index:1500;
+
+    display:none;
+}
+
+.cart-panel.show{
+    display:block;
+}
+
+.cart-panel h3{
+    margin-bottom:12px;
+}
+
+.cart-info{
+    color:#666;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.checkout{
+    width:100%;
+
+    margin-top:15px;
+
+    border:none;
+
+    background:#f97316;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+
+    .categories{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .products{
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+    .hero-box{
+        min-height:260px;
+        padding:40px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero-icon{
+        font-size:130px;
+    }
+
+}
+
+@media(min-width:1000px){
+
+    .categories{
+        grid-template-columns:
+            repeat(6,1fr);
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+<div class="header-main">
+
+<div class="brand">
+
+<div class="brand-icon">
+🏪
+</div>
+
+<div class="brand-name">
+Shree Harikrishna <span>Supermart</span>
+</div>
+
+</div>
+
+
+<button class="cart-button" onclick="toggleCart()">
+
+🛒 Cart
+
+<span id="cartCount">
+0
+</span>
+
+</button>
+
+</div>
+
+
+<div class="location">
+
+<div class="location-inner">
+
+📍 Delivering to:
+<strong>Surat, Gujarat</strong>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<div class="search-area">
+
+<div class="search">
+
+<div class="search-icon">
+🔎
+</div>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search for products..."
+onkeyup="searchProducts()"
+>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-box">
+
+<div class="hero-text">
+
+<div class="hero-tag">
+⚡ FASTEST DELIVERY
+</div>
+
+<h1>
+Everything you need,
+<span>delivered fast.</span>
+</h1>
+
+<p>
+Grocery, bakery, dairy products, snacks,
+beverages and household essentials.
+</p>
+
+<button
+class="shop-btn"
+onclick="document.getElementById('products').scrollIntoView()"
+>
+Shop Now
+</button>
+
+</div>
+
+
+<div class="hero-icon">
+🛍️
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     SHOP BY CATEGORY
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+Shop by Category
+</h2>
+
+<small>
+View all →
+</small>
+
+</div>
+
+
+<div class="categories">
+
+
+<div class="category">
+
+<div class="category-image cat-grocery">
+🛒
+</div>
+
+<div class="category-name">
+Grocery & Kitchen
+</div>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-image cat-dairy">
+🧈
+</div>
+
+<div class="category-name">
+Dairy Products
+</div>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-image cat-bakery">
+🍞
+</div>
+
+<div class="category-name">
+Bakery
+</div>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-image cat-snacks">
+🍿
+</div>
+
+<div class="category-name">
+Snacks & Namkeen
+</div>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-image cat-drinks">
+🥤
+</div>
+
+<div class="category-name">
+Beverages
+</div>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-image cat-household">
+🧹
+</div>
+
+<div class="category-name">
+Household Essentials
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     QUICK CATEGORY
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+Popular Categories
+</h2>
+
+</div>
+
+
+<div class="quick-scroll">
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🧈
+</div>
+
+<p>
+Butter & Cheese
+</p>
+
+</div>
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🍞
+</div>
+
+<p>
+Fresh Bakery
+</p>
+
+</div>
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🍪
+</div>
+
+<p>
+Biscuits
+</p>
+
+</div>
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🍫
+</div>
+
+<p>
+Chocolates
+</p>
+
+</div>
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🥤
+</div>
+
+<p>
+Cold Drinks
+</p>
+
+</div>
+
+
+<div class="quick">
+
+<div class="quick-icon">
+🧹
+</div>
+
+<p>
+Cleaning
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section class="section" id="products">
+
+<div class="section-title">
+
+<h2>
+Popular Products
+</h2>
+
+<small>
+View all →
+</small>
+
+</div>
+
+
+<div class="products">
+
+
+<!-- PRODUCT 1 -->
+
+<div class="product" data-name="Amul Butter">
+
+<div class="discount">
+10% OFF
+</div>
+
+<div class="product-img">
+🧈
+</div>
+
+<div class="product-name">
+Amul Butter
+</div>
+
+<div class="product-qty">
+100 g
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹54
+<span class="mrp">₹60</span>
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 2 -->
+
+<div class="product" data-name="Amul Cheese">
+
+<div class="discount">
+5% OFF
+</div>
+
+<div class="product-img">
+🧀
+</div>
+
+<div class="product-name">
+Amul Cheese
+</div>
+
+<div class="product-qty">
+200 g
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹114
+<span class="mrp">₹120</span>
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product" data-name="Fresh Bread">
+
+<div class="product-img">
+🍞
+</div>
+
+<div class="product-name">
+Fresh Bread
+</div>
+
+<div class="product-qty">
+400 g
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹40
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 4 -->
+
+<div class="product" data-name="Biscuits">
+
+<div class="discount">
+BEST SELLER
+</div>
+
+<div class="product-img">
+🍪
+</div>
+
+<div class="product-name">
+Premium Biscuits
+</div>
+
+<div class="product-qty">
+1 Pack
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹20
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 5 -->
+
+<div class="product" data-name="Potato Chips">
+
+<div class="product-img">
+🥔
+</div>
+
+<div class="product-name">
+Potato Chips
+</div>
+
+<div class="product-qty">
+100 g
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹20
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 6 -->
+
+<div class="product" data-name="Chocolate">
+
+<div class="product-img">
+🍫
+</div>
+
+<div class="product-name">
+Chocolate
+</div>
+
+<div class="product-qty">
+1 Pack
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹50
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 7 -->
+
+<div class="product" data-name="Cold Drink">
+
+<div class="product-img">
+🥤
+</div>
+
+<div class="product-name">
+Cold Drink
+</div>
+
+<div class="product-qty">
+750 ml
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹40
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PRODUCT 8 -->
+
+<div class="product" data-name="Namkeen">
+
+<div class="discount">
+POPULAR
+</div>
+
+<div class="product-img">
+🥜
+</div>
+
+<div class="product-name">
+Mix Namkeen
+</div>
+
+<div class="product-qty">
+200 g
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+₹35
+</div>
+
+<button class="add" onclick="addToCart()">
+ADD
+</button>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     OFFER
+========================= -->
+
+<section class="offer">
+
+<div class="offer-box">
+
+<div>
+
+<h2>
+🎉 Special Offers
+</h2>
+
+<p>
+Great prices on your everyday essentials.
+</p>
+
+</div>
+
+<div class="offer-icon">
+🛍️
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     DELIVERY
+========================= -->
+
+<section class="delivery">
+
+<div class="delivery-box">
+
+<h2>
+🚴 Fast Home Delivery
+</h2>
+
+<p>
+Order your daily essentials online and get them
+delivered quickly to your doorstep from
+Shree Harikrishna Supermart.
+</p>
+
+
+<div class="delivery-features">
+
+
+<div class="feature">
+
+<div class="feature-icon">
+⚡
+</div>
+
+<p>
+Fast Delivery
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🛒
+</div>
+
+<p>
+Fresh Products
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+💰
+</div>
+
+<p>
+Best Prices
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<h3>
+🏪 Shree Harikrishna Supermart
+</h3>
+
+<p>
+Grocery • Dairy Products • Bakery
+</p>
+
+<p>
+Snacks • Beverages • Household Essentials
+</p>
+
+<p>
+📍 Surat, Gujarat
+</p>
+
+<p>
+📞 Contact us for orders
+</p>
+
+</footer>
+
+
+
+<!-- =========================
+     CART PANEL
+========================= -->
+
+<div class="cart-panel" id="cartPanel">
+
+<h3>
+🛒 Your Cart
+</h3>
+
+<div class="cart-info">
+
+You have
+
+<strong id="cartItems">
+0
+</strong>
+
+item(s) in your cart.
+
+</div>
+
+<button class="checkout">
+Proceed to Order
+</button>
+
+</div>
+
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-nav">
+
+<div
+class="nav-item active"
+onclick="window.scrollTo(0,0)"
+>
+
+<span class="nav-icon">
+🏠
+</span>
+
+Home
+
+</div>
+
+
+<div
+class="nav-item"
+onclick="document.querySelector('.categories').scrollIntoView()"
+>
+
+<span class="nav-icon">
+📂
+</span>
+
+Categories
+
+</div>
+
+
+<div
+class="nav-item"
+onclick="toggleCart()"
+>
+
+<span class="nav-icon">
+🛒
+</span>
+
+Cart
+
+</div>
+
+
+<div class="nav-item">
+
+<span class="nav-icon">
+📦
+</span>
+
+Orders
+
+</div>
+
+</nav>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+let cartCount = 0;
+
+
+/* ADD TO CART */
+
+function addToCart(){
+
+cartCount++;
+
+document.getElementById("cartCount").innerText =
+cartCount;
+
+document.getElementById("cartItems").innerText =
+cartCount;
+
+}
+
+
+/* CART */
+
+function toggleCart(){
+
+document
+.getElementById("cartPanel")
+.classList.toggle("show");
+
+}
+
+
+/* SEARCH */
+
+function searchProducts(){
+
+let search =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+let products =
+document.querySelectorAll(".product");
+
+products.forEach(function(product){
+
+let name =
+product
+.getAttribute("data-name")
+.toLowerCase();
+
+if(name.includes(search)){
+
+product.style.display="block";
+
+}else{
+
+product.style.display="none";
+
+}
+
+});
+
+}
+
+</script>
+
+
+</body>
+</html>
