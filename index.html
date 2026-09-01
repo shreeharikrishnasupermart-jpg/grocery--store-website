@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shree Harikrishna Supermart</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+
+    <div class="logo">
+      🏪
+      <div>
+        <strong>Shree Harikrishna</strong>
+        <span>Supermart</span>
+      </div>
+    </div>
+
+    <div class="location">
+      📍 Surat
+    </div>
+
+    <div class="header-actions">
+
+      <button class="search-icon">
+        🔍
+      </button>
+
+      <button class="cart-btn" onclick="openCart()">
+        🛒
+        <span>Cart</span>
+        <b id="cartCount">0</b>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div>
+        <p class="small-title">FAST DELIVERY FROM YOUR LOCAL STORE</p>
+
+        <h1>
+          Groceries & Daily<br>
+          Essentials at Your Door
+        </h1>
+
+        <p class="hero-text">
+          Grocery, bakery, snacks, beverages and household
+          products delivered quickly from Shree Harikrishna Supermart.
+        </p>
+
+        <button class="shop-btn" onclick="scrollToProducts()">
+          Shop Now →
+        </button>
+      </div>
+
+      <div class="hero-cart">
+        🛒
+        <span>🥫</span>
+        <span>🍪</span>
+        <span>🍞</span>
+        <span>🥤</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SEARCH ================= -->
+  <section class="search-section">
+
+    <div class="search-box">
+
+      <span>🔍</span>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for groceries, snacks, bakery..."
+        onkeyup="searchProducts()"
+      >
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= QUICK CATEGORIES ================= -->
+  <section class="section">
+
+    <div class="section-heading">
+      <h2>Shop by Category</h2>
+      <button onclick="showAllProducts()">View All →</button>
+    </div>
+
+
+    <div class="categories">
+
+      <div class="category-card" onclick="filterCategory('grocery')">
+        <div class="category-image">
+          🥫
+        </div>
+        <h3>Grocery & Kitchen</h3>
+        <p>Daily essentials</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('bakery')">
+        <div class="category-image">
+          🍞
+        </div>
+        <h3>Bakery</h3>
+        <p>Fresh bakery items</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('snacks')">
+        <div class="category-image">
+          🍟
+        </div>
+        <h3>Snacks</h3>
+        <p>Chips & Namkeen</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('beverages')">
+        <div class="category-image">
+          🥤
+        </div>
+        <h3>Beverages</h3>
+        <p>Drinks & Juices</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('dairy')">
+        <div class="category-image">
+          🧈
+        </div>
+        <h3>Dairy Products</h3>
+        <p>Butter, Cheese & more</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('household')">
+        <div class="category-image">
+          🧹
+        </div>
+        <h3>Household</h3>
+        <p>Home essentials</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('personal')">
+        <div class="category-image">
+          🧴
+        </div>
+        <h3>Personal Care</h3>
+        <p>Daily care products</p>
+      </div>
+
+
+      <div class="category-card" onclick="filterCategory('instant')">
+        <div class="category-image">
+          🍜
+        </div>
+        <h3>Instant Food</h3>
+        <p>Quick & easy food</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= OFFERS ================= -->
+  <section class="section">
+
+    <div class="offer-banner">
+
+      <div>
+        <p>🔥 TODAY'S SPECIAL</p>
+
+        <h2>
+          Great Products.<br>
+          Great Prices.
+        </h2>
+
+        <span>
+          Shop your daily essentials at your local supermart.
+        </span>
+      </div>
+
+      <div class="offer-icon">
+        🛍️
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PRODUCTS ================= -->
+  <section class="section" id="products">
+
+    <div class="section-heading">
+
+      <div>
+        <h2>Popular Products</h2>
+        <p class="section-subtitle">
+          Most loved products from our store
+        </p>
+      </div>
+
+      <button onclick="showAllProducts()">
+        View All →
+      </button>
+
+    </div>
+
+
+    <div class="products" id="productList">
+
+
+      <!-- PRODUCT 1 -->
+      <div class="product-card" data-category="snacks">
+
+        <div class="product-image">
+          🍟
+          <span class="discount">10% OFF</span>
+        </div>
+
+        <div class="product-info">
+
+          <small>Snacks</small>
+
+          <h3>Lay's Potato Chips</h3>
+
+          <p class="weight">52 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹20</strong>
+              <del>₹22</del>
+            </div>
+
+            <button onclick="addToCart('Lay\\'s Potato Chips',20)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 2 -->
+      <div class="product-card" data-category="snacks">
+
+        <div class="product-image">
+          🍪
+        </div>
+
+        <div class="product-info">
+
+          <small>Biscuits</small>
+
+          <h3>Parle-G Biscuits</h3>
+
+          <p class="weight">250 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹30</strong>
+              <del>₹35</del>
+            </div>
+
+            <button onclick="addToCart('Parle-G Biscuits',30)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 3 -->
+      <div class="product-card" data-category="bakery">
+
+        <div class="product-image">
+          🍞
+        </div>
+
+        <div class="product-info">
+
+          <small>Bakery</small>
+
+          <h3>Fresh Bread</h3>
+
+          <p class="weight">400 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹40</strong>
+              <del>₹45</del>
+            </div>
+
+            <button onclick="addToCart('Fresh Bread',40)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 4 -->
+      <div class="product-card" data-category="dairy">
+
+        <div class="product-image">
+          🧈
+        </div>
+
+        <div class="product-info">
+
+          <small>Dairy</small>
+
+          <h3>Amul Butter</h3>
+
+          <p class="weight">100 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹60</strong>
+              <del>₹65</del>
+            </div>
+
+            <button onclick="addToCart('Amul Butter',60)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 5 -->
+      <div class="product-card" data-category="dairy">
+
+        <div class="product-image">
+          🧀
+        </div>
+
+        <div class="product-info">
+
+          <small>Dairy</small>
+
+          <h3>Amul Cheese</h3>
+
+          <p class="weight">200 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹140</strong>
+              <del>₹150</del>
+            </div>
+
+            <button onclick="addToCart('Amul Cheese',140)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 6 -->
+      <div class="product-card" data-category="beverages">
+
+        <div class="product-image">
+          🥤
+        </div>
+
+        <div class="product-info">
+
+          <small>Beverages</small>
+
+          <h3>Fruit Juice</h3>
+
+          <p class="weight">1 L</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹110</strong>
+              <del>₹120</del>
+            </div>
+
+            <button onclick="addToCart('Fruit Juice',110)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 7 -->
+      <div class="product-card" data-category="grocery">
+
+        <div class="product-image">
+          🍚
+        </div>
+
+        <div class="product-info">
+
+          <small>Grocery</small>
+
+          <h3>Premium Rice</h3>
+
+          <p class="weight">5 kg</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹350</strong>
+              <del>₹380</del>
+            </div>
+
+            <button onclick="addToCart('Premium Rice',350)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 8 -->
+      <div class="product-card" data-category="instant">
+
+        <div class="product-image">
+          🍜
+        </div>
+
+        <div class="product-info">
+
+          <small>Instant Food</small>
+
+          <h3>Instant Noodles</h3>
+
+          <p class="weight">280 g</p>
+
+          <div class="product-bottom">
+
+            <div>
+              <strong>₹55</strong>
+              <del>₹60</del>
+            </div>
+
+            <button onclick="addToCart('Instant Noodles',55)">
+              ADD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= DELIVERY ================= -->
+  <section class="section">
+
+    <div class="delivery-box">
+
+      <div class="delivery-item">
+        <span>⚡</span>
+        <div>
+          <strong>Fast Delivery</strong>
+          <p>Get your order delivered quickly</p>
+        </div>
+      </div>
+
+
+      <div class="delivery-item">
+        <span>🛒</span>
+        <div>
+          <strong>500+ Products</strong>
+          <p>Everything you need in one place</p>
+        </div>
+      </div>
+
+
+      <div class="delivery-item">
+        <span>💳</span>
+        <div>
+          <strong>Easy Payment</strong>
+          <p>Pay conveniently at checkout</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+
+    <div class="footer-content">
+
+      <div>
+        <h2>🏪 Shree Harikrishna Supermart</h2>
+        <p>
+          Your local store for grocery, bakery,
+          dairy and daily essentials.
+        </p>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <p>Grocery & Kitchen</p>
+        <p>Bakery</p>
+        <p>Snacks</p>
+        <p>Beverages</p>
+        <p>Dairy Products</p>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <p>📍 Surat, Gujarat</p>
+        <p>📞 Contact for orders</p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Shree Harikrishna Supermart
+    </div>
+
+  </footer>
+
+
+  <!-- ================= CART POPUP ================= -->
+  <div class="cart-overlay" id="cartOverlay">
+
+    <div class="cart-box">
+
+      <div class="cart-header">
+
+        <h2>🛒 Your Cart</h2>
+
+        <button onclick="closeCart()">
+          ✕
+        </button>
+
+      </div>
+
+      <div id="cartItems">
+
+        <div class="empty-cart">
+          🛒
+          <h3>Your cart is empty</h3>
+          <p>Add products to your cart.</p>
+        </div>
+
+      </div>
+
+      <div class="cart-total">
+
+        <span>Total</span>
+
+        <strong id="cartTotal">
+          ₹0
+        </strong>
+
+      </div>
+
+      <button class="checkout-btn">
+        Proceed to Checkout →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+
+    let cart = [];
+
+
+    /* ADD TO CART */
+
+    function addToCart(name, price) {
+
+      const existing = cart.find(item => item.name === name);
+
+      if (existing) {
+
+        existing.quantity++;
+
+      } else {
+
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+
+      }
+
+      updateCart();
+
+      alert(name + " added to cart 🛒");
+
+    }
+
+
+    /* UPDATE CART */
+
+    function updateCart() {
+
+      let totalItems = 0;
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+
+        totalItems += item.quantity;
+        totalPrice += item.price * item.quantity;
+
+      });
+
+
+      document.getElementById("cartCount").innerText =
+        totalItems;
+
+      document.getElementById("cartTotal").innerText =
+        "₹" + totalPrice;
+
+
+      const cartItems =
+        document.getElementById("cartItems");
+
+
+      if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+          <div class="empty-cart">
+            🛒
+            <h3>Your cart is empty</h3>
+            <p>Add products to your cart.</p>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      cartItems.innerHTML = "";
+
+
+      cart.forEach((item, index) => {
+
+        cartItems.innerHTML += `
+
+          <div class="cart-item">
+
+            <div>
+              <strong>${item.name}</strong>
+              <p>₹${item.price} × ${item.quantity}</p>
+            </div>
+
+            <div class="quantity">
+
+              <button onclick="decreaseItem(${index})">
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button onclick="increaseItem(${index})">
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+    }
+
+
+    /* INCREASE */
+
+    function increaseItem(index) {
+
+      cart[index].quantity++;
+
+      updateCart();
+
+    }
+
+
+    /* DECREASE */
+
+    function decreaseItem(index) {
+
+      cart[index].quantity--;
+
+      if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+      }
+
+      updateCart();
+
+    }
+
+
+    /* OPEN CART */
+
+    function openCart() {
+
+      document
+        .getElementById("cartOverlay")
+        .classList.add("active");
+
+    }
+
+
+    /* CLOSE CART */
+
+    function closeCart() {
+
+      document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
+
+    }
+
+
+    /* SEARCH */
+
+    function searchProducts() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+
+      const products =
+        document.querySelectorAll(".product-card");
+
+
+      products.forEach(product => {
+
+        const name =
+          product
+            .querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+
+        if (name.includes(search)) {
+
+          product.style.display = "block";
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+
+    }
+
+
+    /* CATEGORY FILTER */
+
+    function filterCategory(category) {
+
+      const products =
+        document.querySelectorAll(".product-card");
+
+
+      products.forEach(product => {
+
+        if (
+          product.dataset.category === category
+        ) {
+
+          product.style.display = "block";
+
+        } else {
+
+          product.style.display = "none";
+
+        }
+
+      });
+
+
+      document
+        .getElementById("products")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* SHOW ALL */
+
+    function showAllProducts() {
+
+      const products =
+        document.querySelectorAll(".product-card");
+
+
+      products.forEach(product => {
+
+        product.style.display = "block";
+
+      });
+
+
+      document
+        .getElementById("products")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* SCROLL TO PRODUCTS */
+
+    function scrollToProducts() {
+
+      document
+        .getElementById("products")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+  </script>
+
+</body>
+              </html>
