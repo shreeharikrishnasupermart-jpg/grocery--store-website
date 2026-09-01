@@ -1,0 +1,86 @@
+/* Shree Harikrishna Supermart
+   Main website styles
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Main orange theme */
+:root {
+  --orange: #ff6b00;
+  --orange-light: #fff1e6;
+  --white: #ffffff;
+  --text: #222222;
+  --muted: #666666;
+  --border: #eeeeee;
+}
+
+/* Header */
+header {
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Buttons */
+.orange-btn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+/* Product grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* Product card */
+.product {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 12px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
