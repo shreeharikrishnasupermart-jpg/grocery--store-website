@@ -1264,3 +1264,66 @@ function initializeSearch() {
 function initializeStore() {
 
   
+  loadCart();
+  initializeSearch();
+  renderProducts();
+  updateCartUI();
+
+  console.log("Shree Harikrishna Supermart loaded successfully.");
+}
+
+
+// Start website
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeStore);
+} else {
+  initializeStore();
+}
+
+
+// Fix category names
+const originalFilterCategory = filterCategory;
+
+function filterCategory(category) {
+
+  const categoryMap = {
+    all: "All Products",
+    grocery: "Grocery & Kitchen",
+    dairy: "Dairy",
+    bakery: "Bakery",
+    snacks: "Snacks",
+    beverages: "Beverages",
+    household: "Household Essentials"
+  };
+
+  currentCategory =
+    categoryMap[category] || category;
+
+  currentSearch = "";
+
+  const input = getSearchInput();
+
+  if (input) {
+    input.value = "";
+  }
+
+  hideSuggestions();
+
+  document
+    .querySelectorAll(".category-card")
+    .forEach(card => {
+      card.classList.remove("active");
+    });
+
+  const activeCard =
+    document.querySelector(
+      `[data-category="${category}"]`
+    );
+
+  if (activeCard) {
+    activeCard.classList.add("active");
+  }
+
+  renderProducts();
+  scrollToProducts();
+}
