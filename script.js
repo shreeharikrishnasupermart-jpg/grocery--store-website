@@ -1,227 +1,59 @@
-// ==========================================
-// SHREE HARIKRUSHNA SUPERMART
-// Stable Store JavaScript
-// ==========================================
+// ============================================
+// SHREE HARIKRISHNA SUPERMART
+// PRODUCT + SEARCH + CART SYSTEM
+// ============================================
 
 const products = [
-  // GROCERY
-  {
-    id: 1,
-    name: "Aashirvaad Atta",
-    category: "Grocery & Kitchen",
-    price: 299,
-    unit: "5 kg",
-    image: "🌾"
-  },
-  {
-    id: 2,
-    name: "Tata Salt",
-    category: "Grocery & Kitchen",
-    price: 28,
-    unit: "1 kg",
-    image: "🧂"
-  },
-  {
-    id: 3,
-    name: "Fortune Sunflower Oil",
-    category: "Grocery & Kitchen",
-    price: 145,
-    unit: "1 L",
-    image: "🫗"
-  },
-  {
-    id: 4,
-    name: "Tata Tea",
-    category: "Grocery & Kitchen",
-    price: 125,
-    unit: "250 g",
-    image: "🍵"
-  },
+  // GROCERY & KITCHEN
+  { id: 1, name: "Aashirvaad Atta", category: "grocery", price: 299, weight: "5 kg", image: "🌾" },
+  { id: 2, name: "Tata Salt", category: "grocery", price: 28, weight: "1 kg", image: "🧂" },
+  { id: 3, name: "Fortune Sunflower Oil", category: "grocery", price: 145, weight: "1 L", image: "🫗" },
+  { id: 4, name: "Tata Tea", category: "grocery", price: 125, weight: "250 g", image: "🍵" },
 
   // DAIRY
-  {
-    id: 5,
-    name: "Amul Butter",
-    category: "Dairy",
-    price: 58,
-    unit: "100 g",
-    image: "🧈"
-  },
-  {
-    id: 6,
-    name: "Amul Cheese",
-    category: "Dairy",
-    price: 145,
-    unit: "200 g",
-    image: "🧀"
-  },
-  {
-    id: 7,
-    name: "Amul Fresh Cream",
-    category: "Dairy",
-    price: 70,
-    unit: "250 ml",
-    image: "🥛"
-  },
-  {
-    id: 8,
-    name: "Amul Paneer",
-    category: "Dairy",
-    price: 90,
-    unit: "200 g",
-    image: "🧀"
-  },
+  { id: 5, name: "Amul Butter", category: "dairy", price: 58, weight: "100 g", image: "🧈" },
+  { id: 6, name: "Amul Cheese", category: "dairy", price: 145, weight: "200 g", image: "🧀" },
+  { id: 7, name: "Amul Fresh Cream", category: "dairy", price: 70, weight: "250 ml", image: "🥛" },
+  { id: 8, name: "Amul Paneer", category: "dairy", price: 90, weight: "200 g", image: "🧀" },
 
   // BAKERY
-  {
-    id: 9,
-    name: "Sandwich Bread",
-    category: "Bakery",
-    price: 40,
-    unit: "400 g",
-    image: "🍞"
-  },
-  {
-    id: 10,
-    name: "Premium Cookies",
-    category: "Bakery",
-    price: 60,
-    unit: "200 g",
-    image: "🍪"
-  },
-  {
-    id: 11,
-    name: "Pav Bhaji Pav",
-    category: "Bakery",
-    price: 35,
-    unit: "6 pcs",
-    image: "🥖"
-  },
-  {
-    id: 12,
-    name: "Chocolate Cake",
-    category: "Bakery",
-    price: 220,
-    unit: "500 g",
-    image: "🍰"
-  },
+  { id: 9, name: "Sandwich Bread", category: "bakery", price: 40, weight: "400 g", image: "🍞" },
+  { id: 10, name: "Premium Cookies", category: "bakery", price: 60, weight: "200 g", image: "🍪" },
+  { id: 11, name: "Pav Bhaji Pav", category: "bakery", price: 35, weight: "6 pcs", image: "🥖" },
+  { id: 12, name: "Chocolate Cake", category: "bakery", price: 220, weight: "500 g", image: "🍰" },
 
   // SNACKS
-  {
-    id: 13,
-    name: "Lay's Classic",
-    category: "Snacks",
-    price: 20,
-    unit: "52 g",
-    image: "🥔"
-  },
-  {
-    id: 14,
-    name: "Kurkure Masala",
-    category: "Snacks",
-    price: 20,
-    unit: "55 g",
-    image: "🌽"
-  },
-  {
-    id: 15,
-    name: "Parle-G Biscuits",
-    category: "Snacks",
-    price: 10,
-    unit: "79 g",
-    image: "🍪"
-  },
-  {
-    id: 16,
-    name: "Bhujia Sev",
-    category: "Snacks",
-    price: 55,
-    unit: "200 g",
-    image: "🥨"
-  },
+  { id: 13, name: "Lay's Classic", category: "snacks", price: 20, weight: "52 g", image: "🥔" },
+  { id: 14, name: "Kurkure Masala", category: "snacks", price: 20, weight: "55 g", image: "🌽" },
+  { id: 15, name: "Parle-G Biscuits", category: "snacks", price: 10, weight: "79 g", image: "🍪" },
+  { id: 16, name: "Bhujia Sev", category: "snacks", price: 55, weight: "200 g", image: "🥨" },
 
   // BEVERAGES
-  {
-    id: 17,
-    name: "Coca-Cola",
-    category: "Beverages",
-    price: 40,
-    unit: "750 ml",
-    image: "🥤"
-  },
-  {
-    id: 18,
-    name: "Sprite",
-    category: "Beverages",
-    price: 40,
-    unit: "750 ml",
-    image: "🥤"
-  },
-  {
-    id: 19,
-    name: "Real Fruit Juice",
-    category: "Beverages",
-    price: 110,
-    unit: "1 L",
-    image: "🧃"
-  },
-  {
-    id: 20,
-    name: "Packaged Drinking Water",
-    category: "Beverages",
-    price: 20,
-    unit: "1 L",
-    image: "💧"
-  },
+  { id: 17, name: "Coca-Cola", category: "beverages", price: 40, weight: "750 ml", image: "🥤" },
+  { id: 18, name: "Sprite", category: "beverages", price: 40, weight: "750 ml", image: "🥤" },
+  { id: 19, name: "Real Fruit Juice", category: "beverages", price: 110, weight: "1 L", image: "🧃" },
+  { id: 20, name: "Packaged Drinking Water", category: "beverages", price: 20, weight: "1 L", image: "💧" },
 
   // HOUSEHOLD
-  {
-    id: 21,
-    name: "Vim Dishwash Bar",
-    category: "Household Essentials",
-    price: 25,
-    unit: "200 g",
-    image: "🧼"
-  },
-  {
-    id: 22,
-    name: "Surf Excel Matic",
-    category: "Household Essentials",
-    price: 210,
-    unit: "1 kg",
-    image: "🧺"
-  },
-  {
-    id: 23,
-    name: "Harpic Toilet Cleaner",
-    category: "Household Essentials",
-    price: 105,
-    unit: "500 ml",
-    image: "🧴"
-  },
-  {
-    id: 24,
-    name: "Colin Glass Cleaner",
-    category: "Household Essentials",
-    price: 105,
-    unit: "500 ml",
-    image: "✨"
-  }
+  { id: 21, name: "Vim Dishwash Bar", category: "household", price: 25, weight: "200 g", image: "🧼" },
+  { id: 22, name: "Surf Excel Matic", category: "household", price: 210, weight: "1 kg", image: "🧺" },
+  { id: 23, name: "Harpic Toilet Cleaner", category: "household", price: 105, weight: "500 ml", image: "🧴" },
+  { id: 24, name: "Colin Glass Cleaner", category: "household", price: 105, weight: "500 ml", image: "✨" }
 ];
 
 
-// ==========================================
+// ============================================
 // VARIABLES
-// ==========================================
+// ============================================
 
 let cart = {};
-let currentCategory = "All Products";
+let currentCategory = "all";
 let currentSearch = "";
 
 
-// ==========================================
-// SAFE LOCAL STORAGE
-// ==========================================
+// ============================================
+// CART STORAGE
+// ============================================
 
 function loadCart() {
   try {
@@ -229,8 +61,6 @@ function loadCart() {
 
     if (saved) {
       cart = JSON.parse(saved) || {};
-    } else {
-      cart = {};
     }
   } catch (error) {
     cart = {};
@@ -240,158 +70,143 @@ function loadCart() {
 
 function saveCart() {
   try {
-    localStorage.setItem("supermartCart", JSON.stringify(cart));
-  } catch (error) {
-    console.log("Cart could not be saved.");
-  }
-}
-
-
-// ==========================================
-// GET HTML ELEMENTS
-// ==========================================
-
-function getProductsGrid() {
-  return document.getElementById("productsGrid");
-}
-
-function getSearchInput() {
-  return document.getElementById("searchInput");
-}
-
-function getNoProductsMessage() {
-  return document.getElementById("noProducts");
-}
-
-
-// ==========================================
-// SEARCH SUGGESTION BOX
-// ==========================================
-
-function createSearchSuggestions() {
-
-  const input = getSearchInput();
-
-  if (!input) return null;
-
-  let box = document.getElementById("searchSuggestions");
-
-  if (!box) {
-
-    box = document.createElement("div");
-
-    box.id = "searchSuggestions";
-
-    box.className = "search-suggestions";
-
-    const parent = input.parentElement;
-
-    if (parent) {
-      parent.appendChild(box);
-    }
-  }
-
-  return box;
-}
-
-
-// ==========================================
-// PRODUCT FILTER
-// ==========================================
-
-function getFilteredProducts() {
-
-  let result = products;
-
-  // Category filter
-  if (
-    currentCategory &&
-    currentCategory !== "All Products"
-  ) {
-    result = result.filter(
-      product => product.category === currentCategory
+    localStorage.setItem(
+      "supermartCart",
+      JSON.stringify(cart)
     );
+  } catch (error) {
+    console.log("Cart storage error");
   }
-
-  // Search filter
-  if (currentSearch.trim() !== "") {
-
-    const search = currentSearch
-      .toLowerCase()
-      .trim();
-
-    result = result.filter(product => {
-
-      return (
-        product.name.toLowerCase().includes(search) ||
-        product.category.toLowerCase().includes(search)
-      );
-
-    });
-  }
-
-  return result;
 }
 
 
-// ==========================================
+// ============================================
 // RENDER PRODUCTS
-// ==========================================
+// ============================================
 
-function renderProducts(list = null) {
+function renderProducts() {
 
-  const grid = getProductsGrid();
+  const grid =
+    document.getElementById("productsGrid");
 
   if (!grid) {
-    console.log("productsGrid not found");
+    console.error("productsGrid not found");
     return;
   }
 
-  const productsToShow =
-    list !== null
-      ? list
-      : getFilteredProducts();
+  let filteredProducts = products;
+
+
+  // CATEGORY
+  if (currentCategory !== "all") {
+
+    filteredProducts =
+      filteredProducts.filter(
+        product =>
+          product.category === currentCategory
+      );
+
+  }
+
+
+  // SEARCH
+  if (currentSearch.trim() !== "") {
+
+    const search =
+      currentSearch
+        .toLowerCase()
+        .trim();
+
+    filteredProducts =
+      filteredProducts.filter(
+        product =>
+          product.name
+            .toLowerCase()
+            .includes(search)
+      );
+
+  }
+
 
   grid.innerHTML = "";
 
-  const noProducts = getNoProductsMessage();
 
-  if (noProducts) {
-    noProducts.style.display =
-      productsToShow.length === 0
-        ? "block"
-        : "none";
+  // NO PRODUCTS
+  const noProducts =
+    document.getElementById("noProducts");
+
+  if (filteredProducts.length === 0) {
+
+    if (noProducts) {
+      noProducts.style.display = "block";
+    }
+
+  } else {
+
+    if (noProducts) {
+      noProducts.style.display = "none";
+    }
+
   }
 
-  productsToShow.forEach(product => {
 
-    const quantity = Number(cart[product.id] || 0);
+  // PRODUCT COUNT
+  const productCount =
+    document.getElementById("productCount");
 
-    const card = document.createElement("div");
+  if (productCount) {
 
-    card.className = "product-card";
+    productCount.textContent =
+      `${filteredProducts.length} products`;
 
-    card.dataset.productId = product.id;
+  }
+
+
+  // CREATE PRODUCT CARDS
+  filteredProducts.forEach(product => {
+
+    const quantity =
+      Number(cart[product.id] || 0);
+
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "product-card";
+
+    card.dataset.productId =
+      product.id;
+
 
     card.innerHTML = `
 
       <div class="product-image">
-        ${product.image}
+
+        <span class="product-emoji">
+          ${product.image}
+        </span>
+
       </div>
+
 
       <div class="product-info">
 
-        <h3>${product.name}</h3>
+        <div class="product-name">
+          ${product.name}
+        </div>
 
-        <p class="product-unit">
-          ${product.unit}
-        </p>
+        <div class="product-weight">
+          ${product.weight}
+        </div>
+
 
         <div class="product-bottom">
 
           <div class="product-price">
             ₹${product.price}
           </div>
+
 
           ${
             quantity > 0
@@ -426,7 +241,7 @@ function renderProducts(list = null) {
 
                 <button
                   type="button"
-                  class="add-btn"
+                  class="add-button"
                   onclick="addToCart(${product.id})"
                 >
                   ADD
@@ -441,65 +256,17 @@ function renderProducts(list = null) {
 
     `;
 
+
     grid.appendChild(card);
 
   });
 
-  updateProductCount(productsToShow.length);
 }
 
 
-// ==========================================
-// PRODUCT COUNT
-// ==========================================
-
-function updateProductCount(count) {
-
-  const headings =
-    document.querySelectorAll("h2");
-
-  headings.forEach(heading => {
-
-    if (
-      heading.textContent
-        .toLowerCase()
-        .includes("popular products")
-    ) {
-
-      let countElement =
-        heading.parentElement
-          ?.querySelector(".product-count");
-
-      if (!countElement) {
-
-        countElement =
-          document.createElement("span");
-
-        countElement.className =
-          "product-count";
-
-        countElement.style.marginLeft = "8px";
-
-        countElement.style.fontSize = "14px";
-
-        countElement.style.fontWeight = "500";
-
-        countElement.style.opacity = "0.65";
-
-        heading.appendChild(countElement);
-      }
-
-      countElement.textContent =
-        `(${count} products)`;
-    }
-
-  });
-}
-
-
-// ==========================================
+// ============================================
 // CATEGORY FILTER
-// ==========================================
+// ============================================
 
 function filterCategory(category) {
 
@@ -507,88 +274,209 @@ function filterCategory(category) {
 
   currentSearch = "";
 
-  const input = getSearchInput();
+
+  const input =
+    document.getElementById("searchInput");
 
   if (input) {
     input.value = "";
   }
 
-  hideSuggestions();
+
+  // ACTIVE CATEGORY
+  document
+    .querySelectorAll(".category-card")
+    .forEach(card => {
+
+      card.classList.remove("active");
+
+    });
+
+
+  const activeCard =
+    document.querySelector(
+      `.category-card[data-category="${category}"]`
+    );
+
+  if (activeCard) {
+    activeCard.classList.add("active");
+  }
+
 
   renderProducts();
-
-  scrollToProducts();
 
 }
 
 
-// ==========================================
+// ============================================
 // RESET PRODUCTS
-// ==========================================
+// ============================================
 
 function resetProducts() {
 
-  currentCategory = "All Products";
-
+  currentCategory = "all";
   currentSearch = "";
 
-  const input = getSearchInput();
+
+  const input =
+    document.getElementById("searchInput");
 
   if (input) {
     input.value = "";
   }
 
-  hideSuggestions();
+
+  const clearButton =
+    document.getElementById("clearSearch");
+
+  if (clearButton) {
+    clearButton.classList.remove("show");
+  }
+
+
+  document
+    .querySelectorAll(".category-card")
+    .forEach(card => {
+
+      card.classList.remove("active");
+
+    });
+
+
+  const allCard =
+    document.querySelector(
+      '.category-card[data-category="all"]'
+    );
+
+  if (allCard) {
+    allCard.classList.add("active");
+  }
+
 
   renderProducts();
 
 }
 
 
-// ==========================================
+// ============================================
 // SEARCH
-// ==========================================
+// ============================================
 
 function searchProducts(value) {
 
   currentSearch = value;
 
-  const results =
-    getFilteredProducts();
 
-  renderProducts(results);
+  const clearButton =
+    document.getElementById("clearSearch");
 
-  showSuggestions(results);
+  if (clearButton) {
+
+    if (value.trim() !== "") {
+      clearButton.classList.add("show");
+    } else {
+      clearButton.classList.remove("show");
+    }
+
+  }
+
+
+  renderProducts();
+
+  showSearchSuggestions();
+
 }
 
 
-// ==========================================
-// SHOW SEARCH SUGGESTIONS
-// ==========================================
+// ============================================
+// SEARCH SUGGESTIONS
+// ============================================
 
-function showSuggestions(results) {
+function showSearchSuggestions() {
 
-  const box =
-    createSearchSuggestions();
+  const input =
+    document.getElementById("searchInput");
 
-  if (!box) return;
+  if (!input) return;
 
-  box.innerHTML = "";
+
+  let box =
+    document.getElementById(
+      "searchSuggestions"
+    );
+
+
+  if (!box) {
+
+    box =
+      document.createElement("div");
+
+    box.id =
+      "searchSuggestions";
+
+    box.style.position = "absolute";
+    box.style.left = "0";
+    box.style.right = "0";
+    box.style.top = "100%";
+    box.style.zIndex = "5000";
+    box.style.background = "#ffffff";
+    box.style.border = "1px solid #eeeeee";
+    box.style.borderRadius = "12px";
+    box.style.marginTop = "6px";
+    box.style.boxShadow =
+      "0 8px 25px rgba(0,0,0,0.12)";
+    box.style.overflow = "hidden";
+
+
+    const parent =
+      input.closest(".search-box");
+
+    if (parent) {
+
+      parent.style.position =
+        "relative";
+
+      parent.appendChild(box);
+
+    }
+
+  }
+
 
   const search =
-    currentSearch.trim();
+    currentSearch
+      .toLowerCase()
+      .trim();
+
 
   if (search === "") {
 
     box.style.display = "none";
-
     return;
+
   }
+
+
+  const results =
+    products
+      .filter(product =>
+        product.name
+          .toLowerCase()
+          .includes(search)
+      )
+      .slice(0, 8);
+
+
+  box.innerHTML = "";
+
 
   if (results.length === 0) {
 
     box.innerHTML = `
-      <div class="suggestion-empty">
+      <div style="
+        padding:16px;
+        color:#777;
+      ">
         No product found
       </div>
     `;
@@ -596,48 +484,70 @@ function showSuggestions(results) {
     box.style.display = "block";
 
     return;
+
   }
 
 
-  results.slice(0, 8).forEach(product => {
+  results.forEach(product => {
 
     const item =
-      document.createElement("div");
+      document.createElement("button");
 
-    item.className =
-      "search-suggestion-item";
+    item.type = "button";
+
+    item.style.width = "100%";
+    item.style.display = "flex";
+    item.style.alignItems = "center";
+    item.style.gap = "12px";
+    item.style.padding = "12px 15px";
+    item.style.background = "#fff";
+    item.style.border = "0";
+    item.style.borderBottom =
+      "1px solid #eeeeee";
+    item.style.textAlign = "left";
+
 
     item.innerHTML = `
 
-      <span class="suggestion-image">
+      <span style="
+        width:42px;
+        height:42px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:#fff1e6;
+        border-radius:10px;
+        font-size:24px;
+      ">
         ${product.image}
       </span>
 
-      <span class="suggestion-info">
+      <span>
 
-        <strong>
+        <strong style="
+          display:block;
+          color:#222;
+        ">
           ${product.name}
         </strong>
 
-        <small>
-          ${product.unit} · ₹${product.price}
+        <small style="
+          color:#777;
+        ">
+          ${product.weight} • ₹${product.price}
         </small>
 
       </span>
 
     `;
 
+
     item.addEventListener(
       "click",
       function () {
 
-        const input =
-          getSearchInput();
-
-        if (input) {
-          input.value =
-            product.name;
-        }
+        input.value =
+          product.name;
 
         currentSearch =
           product.name;
@@ -645,16 +555,17 @@ function showSuggestions(results) {
         box.style.display =
           "none";
 
-        // Show only exact product
-        renderProducts([product]);
 
-        // Scroll to exact product
+        renderProducts();
+
+
         setTimeout(() => {
 
           const card =
             document.querySelector(
               `[data-product-id="${product.id}"]`
             );
+
 
           if (card) {
 
@@ -663,15 +574,14 @@ function showSuggestions(results) {
               block: "center"
             });
 
-            card.classList.add(
-              "product-selected"
-            );
+
+            card.style.boxShadow =
+              "0 0 0 4px rgba(255,107,0,0.35)";
+
 
             setTimeout(() => {
 
-              card.classList.remove(
-                "product-selected"
-              );
+              card.style.boxShadow = "";
 
             }, 1800);
 
@@ -682,68 +592,72 @@ function showSuggestions(results) {
       }
     );
 
+
     box.appendChild(item);
 
   });
 
-  box.style.display =
-    "block";
-}
 
-
-// ==========================================
-// HIDE SUGGESTIONS
-// ==========================================
-
-function hideSuggestions() {
-
-  const box =
-    document.getElementById(
-      "searchSuggestions"
-    );
-
-  if (box) {
-    box.style.display = "none";
-  }
+  box.style.display = "block";
 
 }
 
 
-// ==========================================
+// ============================================
 // CLEAR SEARCH
-// ==========================================
+// ============================================
 
 function clearSearch() {
 
   currentSearch = "";
 
-  currentCategory =
-    "All Products";
+  currentCategory = "all";
+
 
   const input =
-    getSearchInput();
+    document.getElementById("searchInput");
 
   if (input) {
     input.value = "";
   }
 
-  hideSuggestions();
+
+  const clearButton =
+    document.getElementById("clearSearch");
+
+  if (clearButton) {
+    clearButton.classList.remove("show");
+  }
+
+
+  const suggestions =
+    document.getElementById(
+      "searchSuggestions"
+    );
+
+  if (suggestions) {
+    suggestions.style.display = "none";
+  }
+
 
   renderProducts();
 
 }
 
 
-// ==========================================
-// CART - ADD
-// ==========================================
+// ============================================
+// ADD TO CART
+// ============================================
 
 function addToCart(productId) {
 
-  const id = String(productId);
+  const id =
+    String(productId);
+
 
   cart[id] =
     Number(cart[id] || 0) + 1;
+
 
   saveCart();
 
@@ -754,23 +668,28 @@ function addToCart(productId) {
 }
 
 
-// ==========================================
-// CART - REMOVE
-// ==========================================
+// ============================================
+// REMOVE FROM CART
+// ============================================
 
 function removeFromCart(productId) {
 
-  const id = String(productId);
+  const id =
+    String(productId);
+
 
   if (!cart[id]) return;
 
+
   cart[id] =
     Number(cart[id]) - 1;
+
 
   if (cart[id] <= 0) {
     delete cart[id];
   }
 
+
   saveCart();
 
   renderProducts();
@@ -780,11 +699,11 @@ function removeFromCart(productId) {
 }
 
 
-// ==========================================
-// CART TOTAL ITEMS
-// ==========================================
+// ============================================
+// CART COUNT
+// ============================================
 
-function getCartItemCount() {
+function getCartItems() {
 
   return Object.values(cart)
     .reduce(
@@ -796,9 +715,9 @@ function getCartItemCount() {
 }
 
 
-// ==========================================
+// ============================================
 // CART SUBTOTAL
-// ==========================================
+// ============================================
 
 function getCartSubtotal() {
 
@@ -808,12 +727,15 @@ function getCartSubtotal() {
 
         const product =
           products.find(
-            p => p.id === Number(id)
+            item =>
+              item.id === Number(id)
           );
+
 
         if (!product) {
           return total;
         }
+
 
         return (
           total +
@@ -828,23 +750,23 @@ function getCartSubtotal() {
 }
 
 
-// ==========================================
+// ============================================
 // UPDATE CART UI
-// ==========================================
+// ============================================
 
 function updateCartUI() {
 
   const itemCount =
-    getCartItemCount();
+    getCartItems();
 
   const subtotal =
     getCartSubtotal();
 
 
-  // Header cart count
+  // HEADER
   const headerCount =
     document.getElementById(
-      "cartCount"
+      "headerCartCount"
     );
 
   if (headerCount) {
@@ -853,15 +775,15 @@ function updateCartUI() {
   }
 
 
-  // Bottom cart bar
-  const bottomBar =
+  // BOTTOM CART
+  const bottomCart =
     document.getElementById(
-      "bottomCartBar"
+      "bottomCart"
     );
 
-  const bottomCount =
+  const bottomItems =
     document.getElementById(
-      "bottomCartCount"
+      "bottomCartItems"
     );
 
   const bottomTotal =
@@ -869,19 +791,30 @@ function updateCartUI() {
       "bottomCartTotal"
     );
 
-  if (bottomCount) {
-    bottomCount.textContent =
-      itemCount;
+
+  if (bottomItems) {
+
+    bottomItems.textContent =
+      `${itemCount} ${
+        itemCount === 1
+          ? "item"
+          : "items"
+      }`;
+
   }
+
 
   if (bottomTotal) {
+
     bottomTotal.textContent =
       `₹${subtotal}`;
+
   }
 
-  if (bottomBar) {
 
-    bottomBar.style.display =
+  if (bottomCart) {
+
+    bottomCart.style.display =
       itemCount > 0
         ? "flex"
         : "none";
@@ -891,23 +824,24 @@ function updateCartUI() {
 }
 
 
-// ==========================================
+// ============================================
 // OPEN CART
-// ==========================================
+// ============================================
 
 function openCart() {
 
-  const modal =
+  const overlay =
     document.getElementById(
-      "cartModal"
+      "cartOverlay"
     );
 
-  if (!modal) return;
+  if (!overlay) return;
+
 
   renderCart();
 
-  modal.style.display =
-    "flex";
+
+  overlay.classList.add("show");
 
   document.body.style.overflow =
     "hidden";
@@ -915,21 +849,21 @@ function openCart() {
 }
 
 
-// ==========================================
+// ============================================
 // CLOSE CART
-// ==========================================
+// ============================================
 
 function closeCart() {
 
-  const modal =
+  const overlay =
     document.getElementById(
-      "cartModal"
+      "cartOverlay"
     );
 
-  if (!modal) return;
+  if (!overlay) return;
 
-  modal.style.display =
-    "none";
+
+  overlay.classList.remove("show");
 
   document.body.style.overflow =
     "";
@@ -937,30 +871,28 @@ function closeCart() {
 }
 
 
-// ==========================================
-// CLOSE CART WHEN CLICKING OUTSIDE
-// ==========================================
+// ============================================
+// CLOSE CART OUTSIDE
+// ============================================
 
 function closeCartOutside(event) {
 
-  const modal =
-    document.getElementById(
-      "cartModal"
-    );
-
   if (
-    modal &&
-    event.target === modal
+    event.target &&
+    event.target.id ===
+      "cartOverlay"
   ) {
+
     closeCart();
+
   }
 
 }
 
 
-// ==========================================
+// ============================================
 // RENDER CART
-// ==========================================
+// ============================================
 
 function renderCart() {
 
@@ -969,9 +901,22 @@ function renderCart() {
       "cartItems"
     );
 
+  const emptyCart =
+    document.getElementById(
+      "emptyCart"
+    );
+
+  const cartSummary =
+    document.getElementById(
+      "cartSummary"
+    );
+
+
   if (!container) return;
 
+
   container.innerHTML = "";
+
 
   const entries =
     Object.entries(cart);
@@ -979,106 +924,109 @@ function renderCart() {
 
   if (entries.length === 0) {
 
-    container.innerHTML = `
-      <div class="empty-cart">
-        <div style="font-size:50px;">
-          🛒
-        </div>
+    if (emptyCart) {
+      emptyCart.style.display = "block";
+    }
 
-        <h3>
-          Your cart is empty
-        </h3>
+    if (cartSummary) {
+      cartSummary.style.display = "none";
+    }
 
-        <p>
-          Add some products to continue.
-        </p>
-      </div>
-    `;
-
-  } else {
-
-    entries.forEach(
-      ([id, quantity]) => {
-
-        const product =
-          products.find(
-            p => p.id === Number(id)
-          );
-
-        if (!product) return;
-
-        const item =
-          document.createElement("div");
-
-        item.className =
-          "cart-item";
-
-        item.innerHTML = `
-
-          <div class="cart-item-image">
-            ${product.image}
-          </div>
-
-          <div class="cart-item-info">
-
-            <h4>
-              ${product.name}
-            </h4>
-
-            <p>
-              ${product.unit}
-            </p>
-
-            <strong>
-              ₹${product.price}
-            </strong>
-
-          </div>
-
-          <div class="cart-item-controls">
-
-            <button
-              onclick="removeFromCart(${product.id}); renderCart();"
-            >
-              −
-            </button>
-
-            <span>
-              ${quantity}
-            </span>
-
-            <button
-              onclick="addToCart(${product.id}); renderCart();"
-            >
-              +
-            </button>
-
-          </div>
-
-        `;
-
-        container.appendChild(item);
-
-      }
-    );
+    return;
 
   }
+
+
+  if (emptyCart) {
+    emptyCart.style.display = "none";
+  }
+
+  if (cartSummary) {
+    cartSummary.style.display = "block";
+  }
+
+
+  entries.forEach(
+    ([id, quantity]) => {
+
+      const product =
+        products.find(
+          item =>
+            item.id === Number(id)
+        );
+
+
+      if (!product) return;
+
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "cart-item";
+
+
+      item.innerHTML = `
+
+        <div class="cart-item-image">
+          ${product.image}
+        </div>
+
+
+        <div class="cart-item-info">
+
+          <div class="cart-item-name">
+            ${product.name}
+          </div>
+
+          <div class="cart-item-price">
+            ${product.weight} • ₹${product.price}
+          </div>
+
+          <div class="cart-item-total">
+            ₹${product.price * quantity}
+          </div>
+
+        </div>
+
+
+        <div class="cart-quantity">
+
+          <button
+            onclick="removeFromCart(${product.id}); renderCart();"
+          >
+            −
+          </button>
+
+          <span>
+            ${quantity}
+          </span>
+
+          <button
+            onclick="addToCart(${product.id}); renderCart();"
+          >
+            +
+          </button>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(item);
+
+    }
+  );
 
 
   const subtotal =
     getCartSubtotal();
 
+
   const delivery =
     subtotal >= 500
       ? 0
-      : subtotal > 0
-        ? null
-        : 0;
-
-  const total =
-    delivery === null
-      ? subtotal
-      : subtotal + delivery;
+      : null;
 
 
   const subtotalElement =
@@ -1118,29 +1066,31 @@ function renderCart() {
   if (totalElement) {
 
     totalElement.textContent =
-      delivery === null
-        ? `₹${subtotal} + delivery`
-        : `₹${total}`;
+      delivery === 0
+        ? `₹${subtotal}`
+        : `₹${subtotal}`;
 
   }
 
 }
 
 
-// ==========================================
+// ============================================
 // CHECKOUT
-// ==========================================
+// ============================================
 
 function checkout() {
 
-  if (getCartItemCount() === 0) {
+  if (getCartItems() === 0) {
 
     alert(
       "Your cart is empty."
     );
 
     return;
+
   }
+
 
   alert(
     "Checkout system will be connected next."
@@ -1149,32 +1099,21 @@ function checkout() {
 }
 
 
-// ==========================================
+// ============================================
 // SCROLL TO PRODUCTS
-// ==========================================
+// ============================================
 
 function scrollToProducts() {
 
-  const grid =
-    getProductsGrid();
-
-  if (!grid) return;
-
   const section =
-    grid.closest("section");
+    document.getElementById(
+      "productsSection"
+    );
 
   if (section) {
 
     section.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  } else {
-
-    grid.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+      behavior: "smooth"
     });
 
   }
@@ -1182,148 +1121,63 @@ function scrollToProducts() {
 }
 
 
-// ==========================================
-// INITIALIZE SEARCH
-// ==========================================
-
-function initializeSearch() {
-
-  const input =
-    getSearchInput();
-
-  if (!input) {
-    console.log(
-      "Search input not found."
-    );
-    return;
-  }
-
-  createSearchSuggestions();
-
-
-  input.addEventListener(
-    "input",
-    function () {
-
-      searchProducts(
-        input.value
-      );
-
-    }
-  );
-
-
-  input.addEventListener(
-    "focus",
-    function () {
-
-      if (
-        input.value.trim() !== ""
-      ) {
-
-        showSuggestions(
-          getFilteredProducts()
-        );
-
-      }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "click",
-    function (event) {
-
-      const box =
-        document.getElementById(
-          "searchSuggestions"
-        );
-
-      if (!box) return;
-
-      if (
-        event.target !== input &&
-        !box.contains(event.target)
-      ) {
-
-        hideSuggestions();
-
-      }
-
-    }
-  );
-
-}
-
-
-// ==========================================
-// INITIALIZE WEBSITE
-// ==========================================
+// ============================================
+// INITIALIZE
+// ============================================
 
 function initializeStore() {
 
-  
   loadCart();
-  initializeSearch();
+
   renderProducts();
+
   updateCartUI();
 
-  console.log("Shree Harikrishna Supermart loaded successfully.");
-}
 
-
-// Start website
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initializeStore);
-} else {
-  initializeStore();
-}
-
-
-// Fix category names
-const originalFilterCategory = filterCategory;
-
-function filterCategory(category) {
-
-  const categoryMap = {
-    all: "All Products",
-    grocery: "Grocery & Kitchen",
-    dairy: "Dairy",
-    bakery: "Bakery",
-    snacks: "Snacks",
-    beverages: "Beverages",
-    household: "Household Essentials"
-  };
-
-  currentCategory =
-    categoryMap[category] || category;
-
-  currentSearch = "";
-
-  const input = getSearchInput();
-
-  if (input) {
-    input.value = "";
-  }
-
-  hideSuggestions();
-
-  document
-    .querySelectorAll(".category-card")
-    .forEach(card => {
-      card.classList.remove("active");
-    });
-
-  const activeCard =
-    document.querySelector(
-      `[data-category="${category}"]`
+  const input =
+    document.getElementById(
+      "searchInput"
     );
 
-  if (activeCard) {
-    activeCard.classList.add("active");
+
+  if (input) {
+
+    input.addEventListener(
+      "input",
+      function () {
+
+        searchProducts(
+          input.value
+        );
+
+      }
+    );
+
   }
 
-  renderProducts();
-  scrollToProducts();
+
+  console.log(
+    "Shree Harikrishna Supermart loaded successfully."
+  );
+
 }
+
+
+// ============================================
+// START
+// ============================================
+
+if (
+  document.readyState === "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeStore
+  );
+
+} else {
+
+  initializeStore();
+
+} 
