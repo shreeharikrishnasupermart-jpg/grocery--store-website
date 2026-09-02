@@ -1876,3 +1876,9 @@ footer .copyright {
   }
 
 }
+/* Hide browser's default search clear button */
+.search-box input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
