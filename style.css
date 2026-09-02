@@ -1882,3 +1882,10 @@ footer .copyright {
   appearance: none;
   display: none;
 }
+/* Remove browser default X from search input */
+.search-box input[type="search"]::-webkit-search-cancel-button,
+.search-box input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
