@@ -1,21 +1,15 @@
 // ==========================================
 // SHREE HARIKRUSHNA SUPERMART
-// MAIN JAVASCRIPT
-// ==========================================
-
-
-// ==========================================
-// PRODUCTS
+// Stable Store JavaScript
 // ==========================================
 
 const products = [
-
-  // GROCERY & KITCHEN
+  // GROCERY
   {
     id: 1,
     name: "Aashirvaad Atta",
     category: "Grocery & Kitchen",
-    price: 250,
+    price: 299,
     unit: "5 kg",
     image: "🌾"
   },
@@ -49,7 +43,7 @@ const products = [
     id: 5,
     name: "Amul Butter",
     category: "Dairy",
-    price: 60,
+    price: 58,
     unit: "100 g",
     image: "🧈"
   },
@@ -57,7 +51,7 @@ const products = [
     id: 6,
     name: "Amul Cheese",
     category: "Dairy",
-    price: 140,
+    price: 145,
     unit: "200 g",
     image: "🧀"
   },
@@ -83,7 +77,7 @@ const products = [
     id: 9,
     name: "Sandwich Bread",
     category: "Bakery",
-    price: 45,
+    price: 40,
     unit: "400 g",
     image: "🍞"
   },
@@ -91,7 +85,7 @@ const products = [
     id: 10,
     name: "Premium Cookies",
     category: "Bakery",
-    price: 80,
+    price: 60,
     unit: "200 g",
     image: "🍪"
   },
@@ -107,9 +101,9 @@ const products = [
     id: 12,
     name: "Chocolate Cake",
     category: "Bakery",
-    price: 250,
+    price: 220,
     unit: "500 g",
-    image: "🎂"
+    image: "🍰"
   },
 
   // SNACKS
@@ -126,8 +120,8 @@ const products = [
     name: "Kurkure Masala",
     category: "Snacks",
     price: 20,
-    unit: "90 g",
-    image: "🌶️"
+    unit: "55 g",
+    image: "🌽"
   },
   {
     id: 15,
@@ -180,7 +174,7 @@ const products = [
     image: "💧"
   },
 
-  // HOUSEHOLD ESSENTIALS
+  // HOUSEHOLD
   {
     id: 21,
     name: "Vim Dishwash Bar",
@@ -193,7 +187,7 @@ const products = [
     id: 22,
     name: "Surf Excel Matic",
     category: "Household Essentials",
-    price: 220,
+    price: 210,
     unit: "1 kg",
     image: "🧺"
   },
@@ -201,7 +195,7 @@ const products = [
     id: 23,
     name: "Harpic Toilet Cleaner",
     category: "Household Essentials",
-    price: 95,
+    price: 105,
     unit: "500 ml",
     image: "🧴"
   },
@@ -209,7 +203,7 @@ const products = [
     id: 24,
     name: "Colin Glass Cleaner",
     category: "Household Essentials",
-    price: 110,
+    price: 105,
     unit: "500 ml",
     image: "✨"
   }
@@ -217,84 +211,172 @@ const products = [
 
 
 // ==========================================
-// CART
+// VARIABLES
 // ==========================================
 
-let cart =
-  JSON.parse(localStorage.getItem("supermartCart")) || [];
-
-
-// ==========================================
-// CURRENT FILTER
-// ==========================================
-
+let cart = {};
 let currentCategory = "All Products";
+let currentSearch = "";
 
 
 // ==========================================
-// DOM ELEMENTS
+// SAFE LOCAL STORAGE
 // ==========================================
 
-const productsGrid =
-  document.getElementById("productsGrid");
+function loadCart() {
+  try {
+    const saved = localStorage.getItem("supermartCart");
 
-const noProducts =
-  document.getElementById("noProducts");
+    if (saved) {
+      cart = JSON.parse(saved) || {};
+    } else {
+      cart = {};
+    }
+  } catch (error) {
+    cart = {};
+  }
+}
 
-const searchInput =
-  document.getElementById("searchInput");
 
-const searchSuggestions =
-  document.getElementById("searchSuggestions");
+function saveCart() {
+  try {
+    localStorage.setItem("supermartCart", JSON.stringify(cart));
+  } catch (error) {
+    console.log("Cart could not be saved.");
+  }
+}
+
+
+// ==========================================
+// GET HTML ELEMENTS
+// ==========================================
+
+function getProductsGrid() {
+  return document.getElementById("productsGrid");
+}
+
+function getSearchInput() {
+  return document.getElementById("searchInput");
+}
+
+function getNoProductsMessage() {
+  return document.getElementById("noProducts");
+}
+
+
+// ==========================================
+// SEARCH SUGGESTION BOX
+// ==========================================
+
+function createSearchSuggestions() {
+
+  const input = getSearchInput();
+
+  if (!input) return null;
+
+  let box = document.getElementById("searchSuggestions");
+
+  if (!box) {
+
+    box = document.createElement("div");
+
+    box.id = "searchSuggestions";
+
+    box.className = "search-suggestions";
+
+    const parent = input.parentElement;
+
+    if (parent) {
+      parent.appendChild(box);
+    }
+  }
+
+  return box;
+}
+
+
+// ==========================================
+// PRODUCT FILTER
+// ==========================================
+
+function getFilteredProducts() {
+
+  let result = products;
+
+  // Category filter
+  if (
+    currentCategory &&
+    currentCategory !== "All Products"
+  ) {
+    result = result.filter(
+      product => product.category === currentCategory
+    );
+  }
+
+  // Search filter
+  if (currentSearch.trim() !== "") {
+
+    const search = currentSearch
+      .toLowerCase()
+      .trim();
+
+    result = result.filter(product => {
+
+      return (
+        product.name.toLowerCase().includes(search) ||
+        product.category.toLowerCase().includes(search)
+      );
+
+    });
+  }
+
+  return result;
+}
 
 
 // ==========================================
 // RENDER PRODUCTS
 // ==========================================
 
-function renderProducts(list = products) {
+function renderProducts(list = null) {
 
-  if (!productsGrid) return;
+  const grid = getProductsGrid();
 
-  productsGrid.innerHTML = "";
-
-  if (list.length === 0) {
-
-    if (noProducts) {
-      noProducts.style.display = "block";
-    }
-
+  if (!grid) {
+    console.log("productsGrid not found");
     return;
   }
 
+  const productsToShow =
+    list !== null
+      ? list
+      : getFilteredProducts();
+
+  grid.innerHTML = "";
+
+  const noProducts = getNoProductsMessage();
+
   if (noProducts) {
-    noProducts.style.display = "none";
+    noProducts.style.display =
+      productsToShow.length === 0
+        ? "block"
+        : "none";
   }
 
+  productsToShow.forEach(product => {
 
-  list.forEach(product => {
+    const quantity = Number(cart[product.id] || 0);
 
-    const cartItem =
-      cart.find(item => item.id === product.id);
+    const card = document.createElement("div");
 
-    const quantity =
-      cartItem ? cartItem.quantity : 0;
-
-
-    const card =
-      document.createElement("div");
-
-    // VERY IMPORTANT:
-    // Every product gets its own ID
     card.className = "product-card";
 
     card.dataset.productId = product.id;
 
-
     card.innerHTML = `
 
       <div class="product-image">
-        <span>${product.image}</span>
+        ${product.image}
       </div>
 
       <div class="product-info">
@@ -307,50 +389,50 @@ function renderProducts(list = products) {
 
         <div class="product-bottom">
 
-          <strong>
+          <div class="product-price">
             ₹${product.price}
-          </strong>
+          </div>
 
           ${
-            quantity === 0
+            quantity > 0
 
-            ? `
+              ? `
 
-              <button
-                class="add-btn"
-                onclick="addToCart(${product.id})">
+                <div class="quantity-control">
 
-                ADD
+                  <button
+                    type="button"
+                    onclick="removeFromCart(${product.id})"
+                  >
+                    −
+                  </button>
 
-              </button>
+                  <span>
+                    ${quantity}
+                  </span>
 
-            `
+                  <button
+                    type="button"
+                    onclick="addToCart(${product.id})"
+                  >
+                    +
+                  </button>
 
-            : `
+                </div>
 
-              <div class="quantity-control">
+              `
+
+              : `
 
                 <button
-                  onclick="decreaseQuantity(${product.id})">
-
-                  −
-
+                  type="button"
+                  class="add-btn"
+                  onclick="addToCart(${product.id})"
+                >
+                  ADD
                 </button>
 
-                <span>
-                  ${quantity}
-                </span>
-
-                <button
-                  onclick="increaseQuantity(${product.id})">
-
-                  +
-
-                </button>
-
-              </div>
-
-            `
+              `
           }
 
         </div>
@@ -359,208 +441,235 @@ function renderProducts(list = products) {
 
     `;
 
-
-    productsGrid.appendChild(card);
+    grid.appendChild(card);
 
   });
 
+  updateProductCount(productsToShow.length);
 }
 
 
 // ==========================================
-// SMART SEARCH
+// PRODUCT COUNT
 // ==========================================
 
-function searchProducts() {
+function updateProductCount(count) {
 
-  if (!searchInput) return;
+  const headings =
+    document.querySelectorAll("h2");
 
-  const query =
-    searchInput.value
-      .trim()
-      .toLowerCase();
+  headings.forEach(heading => {
+
+    if (
+      heading.textContent
+        .toLowerCase()
+        .includes("popular products")
+    ) {
+
+      let countElement =
+        heading.parentElement
+          ?.querySelector(".product-count");
+
+      if (!countElement) {
+
+        countElement =
+          document.createElement("span");
+
+        countElement.className =
+          "product-count";
+
+        countElement.style.marginLeft = "8px";
+
+        countElement.style.fontSize = "14px";
+
+        countElement.style.fontWeight = "500";
+
+        countElement.style.opacity = "0.65";
+
+        heading.appendChild(countElement);
+      }
+
+      countElement.textContent =
+        `(${count} products)`;
+    }
+
+  });
+}
 
 
-  // EMPTY SEARCH
-  if (query === "") {
+// ==========================================
+// CATEGORY FILTER
+// ==========================================
 
-    hideSuggestions();
+function filterCategory(category) {
 
-    renderCurrentProducts();
+  currentCategory = category;
 
-    return;
+  currentSearch = "";
+
+  const input = getSearchInput();
+
+  if (input) {
+    input.value = "";
   }
 
+  hideSuggestions();
 
-  // SEARCH PRODUCTS
-  const results =
-    products.filter(product => {
+  renderProducts();
 
-      const name =
-        product.name.toLowerCase();
-
-      const category =
-        product.category.toLowerCase();
-
-      const unit =
-        product.unit.toLowerCase();
-
-
-      return (
-        name.includes(query) ||
-        category.includes(query) ||
-        unit.includes(query)
-      );
-
-    });
-
-
-  // SHOW SEARCH RESULTS
-  renderProducts(results);
-
-
-  // SHOW SUGGESTIONS
-  showSuggestions(results);
+  scrollToProducts();
 
 }
 
 
 // ==========================================
-// SHOW SUGGESTIONS
+// RESET PRODUCTS
+// ==========================================
+
+function resetProducts() {
+
+  currentCategory = "All Products";
+
+  currentSearch = "";
+
+  const input = getSearchInput();
+
+  if (input) {
+    input.value = "";
+  }
+
+  hideSuggestions();
+
+  renderProducts();
+
+}
+
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+function searchProducts(value) {
+
+  currentSearch = value;
+
+  const results =
+    getFilteredProducts();
+
+  renderProducts(results);
+
+  showSuggestions(results);
+}
+
+
+// ==========================================
+// SHOW SEARCH SUGGESTIONS
 // ==========================================
 
 function showSuggestions(results) {
 
-  if (!searchSuggestions) return;
+  const box =
+    createSearchSuggestions();
 
-  searchSuggestions.innerHTML = "";
+  if (!box) return;
 
+  box.innerHTML = "";
 
-  // NO RESULT
+  const search =
+    currentSearch.trim();
+
+  if (search === "") {
+
+    box.style.display = "none";
+
+    return;
+  }
+
   if (results.length === 0) {
 
-    searchSuggestions.innerHTML = `
-
-      <div class="no-search-result">
-
-        <span>🔍</span>
-
-        <div>
-
-          <strong>
-            No products found
-          </strong>
-
-          <small>
-            Try another product name
-          </small>
-
-        </div>
-
+    box.innerHTML = `
+      <div class="suggestion-empty">
+        No product found
       </div>
-
     `;
 
-    searchSuggestions.style.display = "block";
+    box.style.display = "block";
 
     return;
   }
 
 
-  // MAX 6 SUGGESTIONS
-  const suggestions =
-    results.slice(0, 6);
+  results.slice(0, 8).forEach(product => {
 
-
-  suggestions.forEach(product => {
-
-    const suggestion =
+    const item =
       document.createElement("div");
 
+    item.className =
+      "search-suggestion-item";
 
-    suggestion.className =
-      "search-suggestion";
+    item.innerHTML = `
 
-
-    suggestion.innerHTML = `
-
-      <div class="suggestion-image">
+      <span class="suggestion-image">
         ${product.image}
-      </div>
+      </span>
 
-      <div class="suggestion-info">
+      <span class="suggestion-info">
 
         <strong>
           ${product.name}
         </strong>
 
         <small>
-          ${product.unit} • ₹${product.price}
+          ${product.unit} · ₹${product.price}
         </small>
 
-      </div>
-
-      <div class="suggestion-arrow">
-        →
-      </div>
+      </span>
 
     `;
 
-
-    // ======================================
-    // TAP SUGGESTION
-    // ======================================
-
-    suggestion.addEventListener(
+    item.addEventListener(
       "click",
-      function() {
+      function () {
 
-        // Put product name in search
-        searchInput.value =
+        const input =
+          getSearchInput();
+
+        if (input) {
+          input.value =
+            product.name;
+        }
+
+        currentSearch =
           product.name;
 
+        box.style.display =
+          "none";
 
-        // Close suggestions
-        hideSuggestions();
+        // Show only exact product
+        renderProducts([product]);
 
-
-        // IMPORTANT:
-        // Render ALL search results,
-        // not just one product
-        renderProducts(results);
-
-
-        // Wait until cards are created
+        // Scroll to exact product
         setTimeout(() => {
 
-          const selectedCard =
+          const card =
             document.querySelector(
               `[data-product-id="${product.id}"]`
             );
 
+          if (card) {
 
-          if (selectedCard) {
-
-            // Directly scroll to exact product
-            selectedCard.scrollIntoView({
-
+            card.scrollIntoView({
               behavior: "smooth",
-
               block: "center"
-
             });
 
-
-            // Highlight product
-            selectedCard.classList.add(
+            card.classList.add(
               "product-selected"
             );
 
-
-            // Remove highlight
             setTimeout(() => {
 
-              selectedCard.classList.remove(
+              card.classList.remove(
                 "product-selected"
               );
 
@@ -573,17 +682,12 @@ function showSuggestions(results) {
       }
     );
 
-
-    searchSuggestions.appendChild(
-      suggestion
-    );
+    box.appendChild(item);
 
   });
 
-
-  searchSuggestions.style.display =
+  box.style.display =
     "block";
-
 }
 
 
@@ -593,51 +697,16 @@ function showSuggestions(results) {
 
 function hideSuggestions() {
 
-  if (!searchSuggestions) return;
+  const box =
+    document.getElementById(
+      "searchSuggestions"
+    );
 
-  searchSuggestions.innerHTML = "";
-
-  searchSuggestions.style.display =
-    "none";
-
-}
-
-
-// ==========================================
-// SEARCH INPUT EVENT
-// ==========================================
-
-if (searchInput) {
-
-  searchInput.addEventListener(
-    "input",
-    searchProducts
-  );
-
-}
-
-
-// ==========================================
-// CLOSE SEARCH WHEN CLICK OUTSIDE
-// ==========================================
-
-document.addEventListener(
-  "click",
-  function(event) {
-
-    if (
-      searchInput &&
-      searchSuggestions &&
-      !searchInput.contains(event.target) &&
-      !searchSuggestions.contains(event.target)
-    ) {
-
-      hideSuggestions();
-
-    }
-
+  if (box) {
+    box.style.display = "none";
   }
-);
+
+}
 
 
 // ==========================================
@@ -646,383 +715,176 @@ document.addEventListener(
 
 function clearSearch() {
 
-  if (searchInput) {
-    searchInput.value = "";
-  }
-
-  hideSuggestions();
+  currentSearch = "";
 
   currentCategory =
     "All Products";
 
-  renderProducts(products);
+  const input =
+    getSearchInput();
 
-}
-
-
-// ==========================================
-// CURRENT PRODUCTS
-// ==========================================
-
-function renderCurrentProducts() {
-
-  if (
-    currentCategory ===
-    "All Products"
-  ) {
-
-    renderProducts(products);
-
-    return;
-  }
-
-
-  const filtered =
-    products.filter(
-      product =>
-        product.category ===
-        currentCategory
-    );
-
-
-  renderProducts(filtered);
-
-}
-
-
-// ==========================================
-// CATEGORY FILTER
-// ==========================================
-
-function filterCategory(category) {
-
-  currentCategory = category;
-
-
-  // Remove active from all
-  document
-    .querySelectorAll(".category-card")
-    .forEach(card => {
-
-      card.classList.remove("active");
-
-    });
-
-
-  // Add active to selected
-  document
-    .querySelectorAll(".category-card")
-    .forEach(card => {
-
-      if (
-        card.innerText.trim() ===
-        category
-      ) {
-
-        card.classList.add("active");
-
-      }
-
-    });
-
-
-  // Clear search
-  if (searchInput) {
-
-    searchInput.value = "";
-
-  }
-
-
-  hideSuggestions();
-
-
-  // Render category
-  renderCurrentProducts();
-
-}
-
-
-// ==========================================
-// RESET PRODUCTS
-// ==========================================
-
-function resetProducts() {
-
-  currentCategory =
-    "All Products";
-
-  if (searchInput) {
-    searchInput.value = "";
+  if (input) {
+    input.value = "";
   }
 
   hideSuggestions();
 
-  renderProducts(products);
+  renderProducts();
 
 }
 
 
 // ==========================================
-// SCROLL TO PRODUCTS
-// ==========================================
-
-function scrollToProducts() {
-
-  const section =
-    document.getElementById(
-      "productsSection"
-    );
-
-
-  if (section) {
-
-    section.scrollIntoView({
-      behavior: "smooth"
-    });
-
-  }
-
-}
-
-
-// ==========================================
-// ADD TO CART
+// CART - ADD
 // ==========================================
 
 function addToCart(productId) {
 
-  const existing =
-    cart.find(
-      item => item.id === productId
-    );
+  const id = String(productId);
 
-
-  if (existing) {
-
-    existing.quantity += 1;
-
-  } else {
-
-    cart.push({
-
-      id: productId,
-
-      quantity: 1
-
-    });
-
-  }
-
+  cart[id] =
+    Number(cart[id] || 0) + 1;
 
   saveCart();
 
-  updateCartUI();
+  renderProducts();
 
-  renderCurrentProducts();
+  updateCartUI();
 
 }
 
 
 // ==========================================
-// INCREASE
-// ==========================================
-
-function increaseQuantity(productId) {
-
-  const item =
-    cart.find(
-      item => item.id === productId
-    );
-
-
-  if (item) {
-
-    item.quantity += 1;
-
-  }
-
-
-  saveCart();
-
-  updateCartUI();
-
-  renderCurrentProducts();
-
-}
-
-
-// ==========================================
-// DECREASE
-// ==========================================
-
-function decreaseQuantity(productId) {
-
-  const item =
-    cart.find(
-      item => item.id === productId
-    );
-
-
-  if (!item) return;
-
-
-  item.quantity -= 1;
-
-
-  if (item.quantity <= 0) {
-
-    cart =
-      cart.filter(
-        item => item.id !== productId
-      );
-
-  }
-
-
-  saveCart();
-
-  updateCartUI();
-
-  renderCurrentProducts();
-
-}
-
-
-// ==========================================
-// REMOVE
+// CART - REMOVE
 // ==========================================
 
 function removeFromCart(productId) {
 
-  cart =
-    cart.filter(
-      item => item.id !== productId
-    );
+  const id = String(productId);
 
+  if (!cart[id]) return;
+
+  cart[id] =
+    Number(cart[id]) - 1;
+
+  if (cart[id] <= 0) {
+    delete cart[id];
+  }
 
   saveCart();
 
+  renderProducts();
+
   updateCartUI();
 
-  renderCurrentProducts();
-
 }
 
 
 // ==========================================
-// SAVE CART
+// CART TOTAL ITEMS
 // ==========================================
 
-function saveCart() {
+function getCartItemCount() {
 
-  localStorage.setItem(
-    "supermartCart",
-    JSON.stringify(cart)
-  );
-
-}
-
-
-// ==========================================
-// CART UI
-// ==========================================
-
-function updateCartUI() {
-
-  const totalItems =
-    cart.reduce(
-      (sum, item) =>
-        sum + item.quantity,
+  return Object.values(cart)
+    .reduce(
+      (total, quantity) =>
+        total + Number(quantity),
       0
     );
 
+}
 
-  const totalPrice =
-    cart.reduce(
-      (sum, item) => {
+
+// ==========================================
+// CART SUBTOTAL
+// ==========================================
+
+function getCartSubtotal() {
+
+  return Object.entries(cart)
+    .reduce(
+      (total, [id, quantity]) => {
 
         const product =
           products.find(
-            p => p.id === item.id
+            p => p.id === Number(id)
           );
 
+        if (!product) {
+          return total;
+        }
 
         return (
-          sum +
-          (
-            product
-              ? product.price *
-                item.quantity
-              : 0
-          )
+          total +
+          product.price *
+          Number(quantity)
         );
 
       },
       0
     );
 
+}
 
-  // HEADER COUNT
-  const headerCartCount =
+
+// ==========================================
+// UPDATE CART UI
+// ==========================================
+
+function updateCartUI() {
+
+  const itemCount =
+    getCartItemCount();
+
+  const subtotal =
+    getCartSubtotal();
+
+
+  // Header cart count
+  const headerCount =
     document.getElementById(
       "cartCount"
     );
 
-
-  if (headerCartCount) {
-
-    headerCartCount.textContent =
-      totalItems;
-
+  if (headerCount) {
+    headerCount.textContent =
+      itemCount;
   }
 
 
-  // BOTTOM CART
-  const bottomCart =
+  // Bottom cart bar
+  const bottomBar =
     document.getElementById(
-      "bottomCart"
+      "bottomCartBar"
     );
 
-
-  const bottomCartItems =
+  const bottomCount =
     document.getElementById(
-      "bottomCartItems"
+      "bottomCartCount"
     );
 
-
-  const bottomCartTotal =
+  const bottomTotal =
     document.getElementById(
       "bottomCartTotal"
     );
 
+  if (bottomCount) {
+    bottomCount.textContent =
+      itemCount;
+  }
 
-  if (bottomCart) {
+  if (bottomTotal) {
+    bottomTotal.textContent =
+      `₹${subtotal}`;
+  }
 
-    bottomCart.style.display =
-      totalItems > 0
+  if (bottomBar) {
+
+    bottomBar.style.display =
+      itemCount > 0
         ? "flex"
         : "none";
-
-  }
-
-
-  if (bottomCartItems) {
-
-    bottomCartItems.textContent =
-      `${totalItems} item${
-        totalItems !== 1
-          ? "s"
-          : ""
-      }`;
-
-  }
-
-
-  if (bottomCartTotal) {
-
-    bottomCartTotal.textContent =
-      `₹${totalPrice}`;
 
   }
 
@@ -1040,15 +902,15 @@ function openCart() {
       "cartModal"
     );
 
-
   if (!modal) return;
 
+  renderCart();
 
   modal.style.display =
     "flex";
 
-
-  renderCart();
+  document.body.style.overflow =
+    "hidden";
 
 }
 
@@ -1064,29 +926,33 @@ function closeCart() {
       "cartModal"
     );
 
-
   if (!modal) return;
-
 
   modal.style.display =
     "none";
+
+  document.body.style.overflow =
+    "";
 
 }
 
 
 // ==========================================
-// CLOSE CART OUTSIDE
+// CLOSE CART WHEN CLICKING OUTSIDE
 // ==========================================
 
 function closeCartOutside(event) {
 
+  const modal =
+    document.getElementById(
+      "cartModal"
+    );
+
   if (
-    event.target.id ===
-    "cartModal"
+    modal &&
+    event.target === modal
   ) {
-
     closeCart();
-
   }
 
 }
@@ -1103,38 +969,21 @@ function renderCart() {
       "cartItems"
     );
 
-
-  const subtotalElement =
-    document.getElementById(
-      "cartSubtotal"
-    );
-
-
-  const deliveryElement =
-    document.getElementById(
-      "cartDelivery"
-    );
-
-
-  const totalElement =
-    document.getElementById(
-      "cartTotal"
-    );
-
-
   if (!container) return;
-
 
   container.innerHTML = "";
 
+  const entries =
+    Object.entries(cart);
 
-  if (cart.length === 0) {
+
+  if (entries.length === 0) {
 
     container.innerHTML = `
-
       <div class="empty-cart">
-
-        🛒
+        <div style="font-size:50px;">
+          🛒
+        </div>
 
         <h3>
           Your cart is empty
@@ -1143,109 +992,109 @@ function renderCart() {
         <p>
           Add some products to continue.
         </p>
-
       </div>
-
     `;
+
+  } else {
+
+    entries.forEach(
+      ([id, quantity]) => {
+
+        const product =
+          products.find(
+            p => p.id === Number(id)
+          );
+
+        if (!product) return;
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "cart-item";
+
+        item.innerHTML = `
+
+          <div class="cart-item-image">
+            ${product.image}
+          </div>
+
+          <div class="cart-item-info">
+
+            <h4>
+              ${product.name}
+            </h4>
+
+            <p>
+              ${product.unit}
+            </p>
+
+            <strong>
+              ₹${product.price}
+            </strong>
+
+          </div>
+
+          <div class="cart-item-controls">
+
+            <button
+              onclick="removeFromCart(${product.id}); renderCart();"
+            >
+              −
+            </button>
+
+            <span>
+              ${quantity}
+            </span>
+
+            <button
+              onclick="addToCart(${product.id}); renderCart();"
+            >
+              +
+            </button>
+
+          </div>
+
+        `;
+
+        container.appendChild(item);
+
+      }
+    );
 
   }
 
 
-  let subtotal = 0;
+  const subtotal =
+    getCartSubtotal();
 
-
-  cart.forEach(item => {
-
-    const product =
-      products.find(
-        p => p.id === item.id
-      );
-
-
-    if (!product) return;
-
-
-    const itemTotal =
-      product.price *
-      item.quantity;
-
-
-    subtotal += itemTotal;
-
-
-    const div =
-      document.createElement("div");
-
-
-    div.className =
-      "cart-item";
-
-
-    div.innerHTML = `
-
-      <div class="cart-item-image">
-        ${product.image}
-      </div>
-
-      <div class="cart-item-info">
-
-        <h4>
-          ${product.name}
-        </h4>
-
-        <p>
-          ${product.unit}
-        </p>
-
-        <strong>
-          ₹${product.price}
-        </strong>
-
-      </div>
-
-      <div class="cart-item-right">
-
-        <div class="quantity-control">
-
-          <button
-            onclick="decreaseQuantity(${product.id})">
-
-            −
-
-          </button>
-
-          <span>
-            ${item.quantity}
-          </span>
-
-          <button
-            onclick="increaseQuantity(${product.id})">
-
-            +
-
-          </button>
-
-        </div>
-
-        <strong>
-          ₹${itemTotal}
-        </strong>
-
-      </div>
-
-    `;
-
-
-    container.appendChild(div);
-
-  });
-
-
-  // DELIVERY
   const delivery =
     subtotal >= 500
-      ? "FREE"
-      : "Calculated at checkout";
+      ? 0
+      : subtotal > 0
+        ? null
+        : 0;
+
+  const total =
+    delivery === null
+      ? subtotal
+      : subtotal + delivery;
+
+
+  const subtotalElement =
+    document.getElementById(
+      "cartSubtotal"
+    );
+
+  const deliveryElement =
+    document.getElementById(
+      "cartDelivery"
+    );
+
+  const totalElement =
+    document.getElementById(
+      "cartTotal"
+    );
 
 
   if (subtotalElement) {
@@ -1259,7 +1108,9 @@ function renderCart() {
   if (deliveryElement) {
 
     deliveryElement.textContent =
-      delivery;
+      delivery === 0
+        ? "FREE"
+        : "Calculated at checkout";
 
   }
 
@@ -1267,7 +1118,9 @@ function renderCart() {
   if (totalElement) {
 
     totalElement.textContent =
-      `₹${subtotal}`;
+      delivery === null
+        ? `₹${subtotal} + delivery`
+        : `₹${total}`;
 
   }
 
@@ -1280,16 +1133,14 @@ function renderCart() {
 
 function checkout() {
 
-  if (cart.length === 0) {
+  if (getCartItemCount() === 0) {
 
     alert(
       "Your cart is empty."
     );
 
     return;
-
   }
-
 
   alert(
     "Checkout system will be connected next."
@@ -1299,16 +1150,117 @@ function checkout() {
 
 
 // ==========================================
-// INITIAL LOAD
+// SCROLL TO PRODUCTS
 // ==========================================
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
+function scrollToProducts() {
 
-    renderProducts(products);
+  const grid =
+    getProductsGrid();
 
-    updateCartUI();
+  if (!grid) return;
+
+  const section =
+    grid.closest("section");
+
+  if (section) {
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } else {
+
+    grid.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
 
   }
-);
+
+}
+
+
+// ==========================================
+// INITIALIZE SEARCH
+// ==========================================
+
+function initializeSearch() {
+
+  const input =
+    getSearchInput();
+
+  if (!input) {
+    console.log(
+      "Search input not found."
+    );
+    return;
+  }
+
+  createSearchSuggestions();
+
+
+  input.addEventListener(
+    "input",
+    function () {
+
+      searchProducts(
+        input.value
+      );
+
+    }
+  );
+
+
+  input.addEventListener(
+    "focus",
+    function () {
+
+      if (
+        input.value.trim() !== ""
+      ) {
+
+        showSuggestions(
+          getFilteredProducts()
+        );
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      const box =
+        document.getElementById(
+          "searchSuggestions"
+        );
+
+      if (!box) return;
+
+      if (
+        event.target !== input &&
+        !box.contains(event.target)
+      ) {
+
+        hideSuggestions();
+
+      }
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// INITIALIZE WEBSITE
+// ==========================================
+
+function initializeStore() {
+
+  
