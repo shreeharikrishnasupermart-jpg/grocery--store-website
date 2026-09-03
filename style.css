@@ -1616,7 +1616,10 @@ footer .copyright {
   .delivery-points {
     flex-direction: column;
 
-    gap: 4p
+    gap: 4px;
+  }
+
+}
 /* ==========================================
    PREMIUM SMART SEARCH
    ========================================== */
