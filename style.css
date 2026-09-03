@@ -1526,7 +1526,9 @@ footer .copyright {
 
     gap: 11px;
   }
-
+.product-card {
+  border-radius: 14px;
+}
   .product-image {
     height: 145px;
   }
