@@ -1542,7 +1542,7 @@ footer .copyright {
   }
 
   .product-name {
-    font-size: 13px;
+    font-size: 14px;
 
     min-height: 35px;
   }
@@ -1552,7 +1552,7 @@ footer .copyright {
   }
 
   .product-price {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .product-bottom {
@@ -1570,7 +1570,7 @@ footer .copyright {
   }
 
   .quantity-control {
-    height: 32px;
+    height: 34px;
   }
 
   .quantity-control button {
