@@ -1120,7 +1120,65 @@ function scrollToProducts() {
 
 }
 
+// ============================================
+// DYNAMIC OFFER
+// ============================================
 
+const storeOffer = {
+  active: false,
+  smallText: "🔥 SPECIAL OFFER",
+  title: "Great Deal Today!",
+  description: "Shop selected products at a special price.",
+  buttonText: "Shop Now"
+};
+
+function renderOffer() {
+  const offerSection =
+    document.getElementById("offerSection");
+
+  if (!offerSection) return;
+
+  if (!storeOffer.active) {
+    offerSection.style.display = "none";
+    offerSection.innerHTML = "";
+    return;
+  }
+
+  offerSection.style.display = "block";
+
+  offerSection.innerHTML = `
+    <div class="offer-card">
+
+      <div class="offer-content">
+
+        <div class="offer-small">
+          ${storeOffer.smallText}
+        </div>
+
+        <h1>
+          ${storeOffer.title}
+        </h1>
+
+        <p>
+          ${storeOffer.description}
+        </p>
+
+        <button
+          class="primary-button"
+          onclick="scrollToProducts()"
+        >
+          ${storeOffer.buttonText} →
+        </button>
+
+      </div>
+
+      <div class="offer-emoji">
+        🛍️
+      </div>
+
+    </div>
+  `;
+}
 // ============================================
 // INITIALIZE
 // ============================================
@@ -1128,7 +1186,7 @@ function scrollToProducts() {
 function initializeStore() {
 
   loadCart();
-
+  renderOffer();
   renderProducts();
 
   updateCartUI();
