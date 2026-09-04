@@ -304,8 +304,6 @@ function filterCategory(category) {
 
 
   renderProducts();
-
-}
   setTimeout(() => {
 
     const section =
@@ -318,7 +316,9 @@ function filterCategory(category) {
       });
     }
 
-  }, 100);
+  }, 150);
+}
+  
 
 // ============================================
 // RESET PRODUCTS
