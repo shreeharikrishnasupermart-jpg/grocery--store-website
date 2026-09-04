@@ -306,7 +306,19 @@ function filterCategory(category) {
   renderProducts();
 
 }
+  setTimeout(() => {
 
+    const section =
+      document.getElementById("productsSection");
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+  }, 100);
 
 // ============================================
 // RESET PRODUCTS
