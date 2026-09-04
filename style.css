@@ -794,7 +794,7 @@ img {
 
   font-weight: 900;
 }
-
+animation: productAppear 0.35s ease both;
 
 /* ================= NO PRODUCTS ================= */
 
