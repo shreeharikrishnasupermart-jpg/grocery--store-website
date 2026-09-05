@@ -271,9 +271,7 @@ function renderProducts() {
 function filterCategory(category) {
 
   currentCategory = category;
-
   currentSearch = "";
-
 
   const input =
     document.getElementById("searchInput");
@@ -282,16 +280,11 @@ function filterCategory(category) {
     input.value = "";
   }
 
-
-  // ACTIVE CATEGORY
   document
     .querySelectorAll(".category-card")
     .forEach(card => {
-
       card.classList.remove("active");
-
     });
-
 
   const activeCard =
     document.querySelector(
@@ -302,21 +295,142 @@ function filterCategory(category) {
     activeCard.classList.add("active");
   }
 
+  openCategoryPage(category);
+
+}
+
+
+// ============================================
+// OPEN CATEGORY PAGE
+// ============================================
+
+function openCategoryPage(category) {
+
+  const categoryPage =
+    document.getElementById("categoryPage");
+
+  const categoryGrid =
+    document.getElementById(
+      "categoryProductsGrid"
+    );
+
+  const productsGrid =
+    document.getElementById("productsGrid");
+
+  const productsSection =
+    document.getElementById("productsSection");
+
+  const title =
+    document.getElementById(
+      "categoryPageTitle"
+    );
+
+  const count =
+    document.getElementById(
+      "categoryPageCount"
+    );
+
+  if (
+    !categoryPage ||
+    !categoryGrid ||
+    !productsGrid
+  ) {
+    return;
+  }
+
+  // CATEGORY NAME
+  const categoryNames = {
+    grocery: "Grocery & Kitchen",
+    dairy: "Dairy",
+    bakery: "Bakery",
+    snacks: "Snacks",
+    beverages: "Beverages",
+    household: "Household"
+  };
+
+  if (title) {
+    title.textContent =
+      categoryNames[category] || "Products";
+  }
+
+  // MOVE PRODUCT GRID INTO CATEGORY PAGE
+  categoryGrid.appendChild(productsGrid);
+
+  if (productsSection) {
+    productsSection.style.display = "none";
+  }
+
+  categoryPage.style.display = "block";
+
+  document.body.style.overflow = "hidden";
 
   renderProducts();
-  setTimeout(() => {
 
-    const section =
-      document.getElementById("productsSection");
+  // PRODUCT COUNT
+  const categoryProducts =
+    products.filter(
+      product =>
+        product.category === category
+    );
 
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
+  if (count) {
+    count.textContent =
+      `${categoryProducts.length} products`;
+  }
 
-  }, 150);
+  window.scrollTo(0, 0);
+}
+
+
+// ============================================
+// CLOSE CATEGORY PAGE
+// ============================================
+
+function closeCategoryPage() {
+
+  const categoryPage =
+    document.getElementById("categoryPage");
+
+  const productsGrid =
+    document.getElementById("productsGrid");
+
+  const productsSection =
+    document.getElementById("productsSection");
+
+  if (!categoryPage || !productsGrid) {
+    return;
+  }
+
+  // PUT PRODUCT GRID BACK
+  if (productsSection) {
+    productsSection.appendChild(productsGrid);
+    productsSection.style.display = "";
+  }
+
+  categoryPage.style.display = "none";
+
+  document.body.style.overflow = "";
+
+  currentCategory = "all";
+
+  renderProducts();
+
+  // ALL CATEGORY ACTIVE
+  document
+    .querySelectorAll(".category-card")
+    .forEach(card => {
+      card.classList.remove("active");
+    });
+
+  const allCard =
+    document.querySelector(
+      '.category-card[data-category="all"]'
+    );
+
+  if (allCard) {
+    allCard.classList.add("active");
+  }
+
 }
   
 
