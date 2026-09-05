@@ -1530,15 +1530,15 @@ footer .copyright {
   border-radius: 14px;
 }
   .product-image {
-    height: 155px;
+    height: 120px;
   }
 
   .product-emoji {
-    font-size: 66px;
+    font-size: 52px;
   }
 
   .product-info {
-    padding: 11px;
+    padding: 9px;
   }
 
   .product-name {
