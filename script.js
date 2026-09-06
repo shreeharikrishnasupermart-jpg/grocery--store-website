@@ -86,9 +86,14 @@ function saveCart() {
 
 function renderProducts() {
 
-  const grid =
-    document.getElementById("productsGrid");
+  const categoryPage =
+  document.getElementById("categoryPage");
 
+const grid =
+  categoryPage &&
+  categoryPage.style.display !== "none"
+    ? document.getElementById("categoryProductsGrid")
+    : document.getElementById("productsGrid");
   if (!grid) {
     console.error("productsGrid not found");
     return;
@@ -341,8 +346,7 @@ function openCategoryPage(category) {
   }
 
   // MOVE PRODUCT GRID INTO CATEGORY PAGE
-  categoryGrid.appendChild(productsGrid);
-
+  
   if (productsSection) {
     productsSection.style.display = "none";
   }
@@ -390,7 +394,7 @@ function closeCategoryPage() {
 
   // PUT PRODUCT GRID BACK
   if (productsSection) {
-    productsSection.appendChild(productsGrid);
+    
     productsSection.style.display = "";
   }
 
