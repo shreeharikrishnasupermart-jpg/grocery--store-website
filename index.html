@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Shop groceries, dairy, bakery, snacks, beverages and household essentials from Shree Harikrishna Supermart."
+    content="Shree Harikrishna Supermart - Grocery, Dairy, Bakery, Snacks, Beverages and Household Essentials."
   >
 
   <link rel="stylesheet" href="style.css">
@@ -19,13 +19,12 @@
   <!-- ================= HEADER ================= -->
 
   <header class="header">
-
     <div class="header-inner">
 
       <div class="brand">
         <div class="brand-icon">🏪</div>
 
-        <div>
+        <div class="brand-text">
           <div class="store-name">
             Shree Harikrishna Supermart
           </div>
@@ -36,25 +35,28 @@
         </div>
       </div>
 
-      <button class="header-cart" onclick="openCart()">
-        🛒 Cart <span id="headerCartCount">0</span>
+      <button
+        class="header-cart"
+        type="button"
+        onclick="openCart()"
+      >
+        🛒 <span>Cart</span>
+        <b id="headerCartCount">0</b>
       </button>
 
     </div>
-
   </header>
 
 
-  <!-- ================= DELIVERY STRIP ================= -->
+  <!-- ================= DELIVERY BAR ================= -->
 
   <div class="delivery-strip">
-
     <div class="delivery-content">
-      🚴 <strong>Delivery in 30–45 minutes</strong>
-      <span>•</span>
+      <span>🚴</span>
+      <strong>Delivery in 30–45 minutes</strong>
+      <span class="delivery-dot">•</span>
       <strong>Above ₹500 FREE DELIVERY</strong>
     </div>
-
   </div>
 
 
@@ -71,20 +73,61 @@
         <span class="search-icon">🔍</span>
 
         <input
-          type="text"
           id="searchInput"
-          placeholder="Search products..."
+          type="search"
+          placeholder="Search groceries, dairy, snacks..."
           autocomplete="off"
+          oninput="searchProducts(this.value)"
         >
 
         <button
-          class="clear-search"
           id="clearSearch"
+          class="clear-search"
+          type="button"
           onclick="clearSearch()"
           aria-label="Clear search"
         >
           ×
         </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= QUICK DELIVERY BANNER ================= -->
+
+    <section class="hero-section">
+
+      <div class="hero-card">
+
+        <div class="hero-content">
+
+          <span class="hero-label">
+            SHREE HARIKRISHNA SUPERMART
+          </span>
+
+          <h1>
+            Daily essentials,<br>
+            delivered fast.
+          </h1>
+
+          <p>
+            Groceries, dairy, bakery, snacks & more
+            delivered to your doorstep.
+          </p>
+
+          <div class="hero-points">
+            <span>✓ Up to 3 km</span>
+            <span>✓ 30–45 min</span>
+            <span>✓ ₹500+ FREE</span>
+          </div>
+
+        </div>
+
+        <div class="hero-visual">
+          🛒
+        </div>
 
       </div>
 
@@ -110,6 +153,7 @@
         <button
           class="category-card active"
           data-category="all"
+          type="button"
           onclick="filterCategory('all')"
         >
           <div class="category-icon">🛒</div>
@@ -120,6 +164,7 @@
         <button
           class="category-card"
           data-category="grocery"
+          type="button"
           onclick="filterCategory('grocery')"
         >
           <div class="category-icon">🥫</div>
@@ -130,9 +175,10 @@
         <button
           class="category-card"
           data-category="dairy"
+          type="button"
           onclick="filterCategory('dairy')"
         >
-          <div class="category-icon">🥛</div>
+          <div class="category-icon">🧀</div>
           <span>Dairy</span>
         </button>
 
@@ -140,6 +186,7 @@
         <button
           class="category-card"
           data-category="bakery"
+          type="button"
           onclick="filterCategory('bakery')"
         >
           <div class="category-icon">🍞</div>
@@ -150,6 +197,7 @@
         <button
           class="category-card"
           data-category="snacks"
+          type="button"
           onclick="filterCategory('snacks')"
         >
           <div class="category-icon">🍟</div>
@@ -160,6 +208,7 @@
         <button
           class="category-card"
           data-category="beverages"
+          type="button"
           onclick="filterCategory('beverages')"
         >
           <div class="category-icon">🥤</div>
@@ -170,6 +219,7 @@
         <button
           class="category-card"
           data-category="household"
+          type="button"
           onclick="filterCategory('household')"
         >
           <div class="category-icon">🧹</div>
@@ -181,42 +231,46 @@
     </section>
 
 
-<!-- ================= DYNAMIC OFFER ================= -->
+    <!-- ================= OFFER ================= -->
 
-<section
-  class="offer-section"
-  id="offerSection"
-  style="display:none;"
->
-</section>
-<!-- ================= CATEGORY PAGE VIEW ================= -->
+    <section class="offer-section">
 
-<section id="categoryPage" class="category-page">
+      <div class="offer-card">
 
-  <div class="category-page-header">
+        <div class="offer-content">
 
-    <button
-      class="category-back"
-      onclick="closeCategoryPage()"
-    >
-      ←
-    </button>
+          <span class="offer-small">
+            FAST LOCAL DELIVERY
+          </span>
 
-    <div class="category-page-heading">
-      <h2 id="categoryPageTitle">Products</h2>
-      <p id="categoryPageCount">0 products</p>
-    </div>
+          <h2>
+            Your everyday<br>
+            shopping, made easy.
+          </h2>
 
-  </div>
+          <p>
+            Order your daily essentials from
+            Shree Harikrishna Supermart.
+          </p>
 
-  <div
-    id="categoryProductsGrid"
-    class="category-products-container"
-  ></div>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="scrollToProducts()"
+          >
+            Start Shopping →
+          </button>
 
-</section>
+        </div>
 
-<!-- ================= END CATEGORY PAGE ================= -->
+        <div class="offer-emoji">
+          🛍️
+        </div>
+
+      </div>
+
+    </section>
+
 
     <!-- ================= PRODUCTS ================= -->
 
@@ -228,7 +282,9 @@
       <div class="products-heading">
 
         <div>
-          <span class="section-label">FRESH & AFFORDABLE</span>
+          <span class="section-label">
+            FRESH & AFFORDABLE
+          </span>
 
           <h2 id="productsTitle">
             Popular Products
@@ -248,9 +304,7 @@
       <div
         class="products-grid"
         id="productsGrid"
-      >
-        <!-- Products will be generated by script.js -->
-      </div>
+      ></div>
 
 
       <div
@@ -259,9 +313,7 @@
         style="display:none;"
       >
 
-        <div class="no-products-icon">
-          🔍
-        </div>
+        <div class="no-products-icon">🔍</div>
 
         <h3>No products found</h3>
 
@@ -271,6 +323,7 @@
 
         <button
           class="primary-button"
+          type="button"
           onclick="resetProducts()"
         >
           Show All Products
@@ -281,7 +334,7 @@
     </section>
 
 
-    <!-- ================= DELIVERY INFO ================= -->
+    <!-- ================= DELIVERY ================= -->
 
     <section class="delivery-section">
 
@@ -293,21 +346,24 @@
 
         <div class="delivery-info">
 
-          <h3>Fast Local Delivery</h3>
+          <span class="section-label">
+            LOCAL DELIVERY
+          </span>
+
+          <h3>
+            Fast delivery to your doorstep
+          </h3>
 
           <p>
-            We deliver your daily essentials
-            within approximately 30–45 minutes.
+            We currently deliver within approximately
+            3 km of our store.
           </p>
 
           <div class="delivery-points">
-
-            <span>✓ Up to 3 km delivery</span>
-
-            <span>✓ Above ₹500 FREE</span>
-
+            <span>✓ Up to 3 km</span>
+            <span>✓ 30–45 minutes</span>
+            <span>✓ ₹500+ FREE</span>
             <span>✓ 7:00 AM – 9:00 PM</span>
-
           </div>
 
         </div>
@@ -319,7 +375,53 @@
   </main>
 
 
-  <!-- ================= BOTTOM CART BAR ================= -->
+  <!-- ================= CATEGORY FULL SCREEN ================= -->
+
+  <section
+    id="categoryPage"
+    class="category-page"
+    aria-hidden="true"
+  >
+
+    <div class="category-page-header">
+
+      <button
+        class="category-back"
+        type="button"
+        onclick="closeCategoryPage()"
+        aria-label="Back"
+      >
+        ←
+      </button>
+
+      <div class="category-page-heading">
+
+        <span class="section-label">
+          SHOPPING
+        </span>
+
+        <h2 id="categoryPageTitle">
+          Products
+        </h2>
+
+        <p id="categoryPageCount">
+          0 products
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="categoryProductsGrid"
+      class="category-products-container"
+    ></div>
+
+  </section>
+
+
+  <!-- ================= BOTTOM CART ================= -->
 
   <div
     class="bottom-cart"
@@ -339,15 +441,17 @@
 
     </div>
 
-
-    <button onclick="openCart()">
+    <button
+      type="button"
+      onclick="openCart()"
+    >
       View Cart →
     </button>
 
   </div>
 
 
-  <!-- ================= CART MODAL ================= -->
+  <!-- ================= CART ================= -->
 
   <div
     class="cart-overlay"
@@ -355,17 +459,25 @@
     onclick="closeCartOutside(event)"
   >
 
-    <div class="cart-modal">
+    <div
+      class="cart-modal"
+      role="dialog"
+      aria-modal="true"
+    >
 
       <div class="cart-header">
 
         <div>
-          <span class="section-label">YOUR ORDER</span>
+          <span class="section-label">
+            YOUR ORDER
+          </span>
+
           <h2>Your Cart</h2>
         </div>
 
         <button
           class="close-cart"
+          type="button"
           onclick="closeCart()"
           aria-label="Close cart"
         >
@@ -378,9 +490,7 @@
       <div
         class="cart-items"
         id="cartItems"
-      >
-        <!-- Cart items generated by JavaScript -->
-      </div>
+      ></div>
 
 
       <div
@@ -400,6 +510,7 @@
 
         <button
           class="primary-button"
+          type="button"
           onclick="closeCart(); scrollToProducts();"
         >
           Start Shopping
@@ -420,7 +531,9 @@
 
         <div class="summary-row">
           <span>Delivery</span>
-          <strong id="cartDelivery">Calculated at checkout</strong>
+          <strong id="cartDelivery">
+            Calculated at checkout
+          </strong>
         </div>
 
         <div class="free-delivery-note">
@@ -434,6 +547,7 @@
 
         <button
           class="checkout-button"
+          type="button"
           onclick="checkout()"
         >
           Proceed to Checkout →
@@ -455,7 +569,11 @@
     </div>
 
     <p>
-      Fastest delivery • Quality products • Local service
+      Fast delivery • Quality products • Local service
+    </p>
+
+    <p>
+      Blue City, Sarthana, Surat
     </p>
 
     <p class="copyright">
@@ -464,8 +582,6 @@
 
   </footer>
 
-
-  <!-- ================= JAVASCRIPT ================= -->
 
   <script src="script.js"></script>
 
