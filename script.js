@@ -179,16 +179,12 @@ function renderProducts() {
       product.id;
 
 
-    card.innerHTML = `
-
+        card.innerHTML = `
       <div class="product-image">
-
         <span class="product-emoji">
           ${product.image}
         </span>
-
       </div>
-
 
       <div class="product-info">
 
@@ -200,19 +196,15 @@ function renderProducts() {
           ${product.weight}
         </div>
 
-
         <div class="product-bottom">
 
           <div class="product-price">
             ₹${product.price}
           </div>
 
-
           ${
             quantity > 0
-
               ? `
-
                 <div class="quantity-control">
 
                   <button
@@ -234,11 +226,8 @@ function renderProducts() {
                   </button>
 
                 </div>
-
               `
-
               : `
-
                 <button
                   type="button"
                   class="add-button"
@@ -246,14 +235,12 @@ function renderProducts() {
                 >
                   ADD
                 </button>
-
               `
           }
 
         </div>
 
       </div>
-
     `;
 
 
