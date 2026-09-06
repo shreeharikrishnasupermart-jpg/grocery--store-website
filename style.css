@@ -794,7 +794,7 @@ img {
 
   font-weight: 900;
 }
-animation: productAppear 0.35s ease both;
+
 
 /* ================= NO PRODUCTS ================= */
 
@@ -1978,9 +1978,35 @@ footer .copyright {
 }
 
 #categoryProductsGrid {
-  padding: 18px;
-  max-width: 1400px;
-  margin: 0 auto;
+  #categoryProductsGrid {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 0;
+}
+
+#categoryProductsGrid .products-grid {
+  width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#categoryProductsGrid .product-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#categoryProductsGrid .product-bottom {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#categoryProductsGrid .add-button,
+#categoryProductsGrid .quantity-control {
+  flex-shrink: 1;
 }
 
 /* Mobile */
