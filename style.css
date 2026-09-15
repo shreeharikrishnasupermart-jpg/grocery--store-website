@@ -894,7 +894,70 @@ main {
   font-weight: 900;
 }
 
+.add-button {
+  width: 92px;
+  height: 42px;
+  border: 2px solid var(--orange);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--orange);
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s ease;
+}
 
+.add-button:hover {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+.add-button:active {
+  transform: scale(0.96);
+}
+
+/* PRODUCT QUANTITY */
+
+.quantity-control {
+  width: 94px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid var(--orange);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.quantity-control button {
+  width: 31px;
+  height: 42px;
+  border: 0;
+  background: var(--orange);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.quantity-control button:hover {
+  background: var(--orange-dark);
+}
+
+.quantity-control span {
+  flex: 1;
+  text-align: center;
+  color: var(--orange);
+  font-size: 15px;
+  font-weight: 900;
+  }
 
 
 /* =====================================================
