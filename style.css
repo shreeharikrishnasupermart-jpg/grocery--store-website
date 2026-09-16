@@ -788,32 +788,32 @@ main {
 
 
 /* =====================================================
-   PROFESSIONAL PRODUCT CARD
+   FINAL PRODUCT CARD
 ===================================================== */
 
 .product-card {
   min-width: 0;
   background: #ffffff;
   border: 1px solid #eeeeee;
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.045);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .product-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
 }
 
-/* PRODUCT IMAGE */
+/* IMAGE */
 
 .product-image {
   width: 100%;
   aspect-ratio: 1 / 0.88;
-  background: #fff8f2;
+  background: #fffaf6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -821,22 +821,29 @@ main {
   overflow: hidden;
 }
 
-.product-emoji {
-  font-size: clamp(42px, 5vw, 62px);
-  filter: drop-shadow(0 6px 7px rgba(0, 0, 0, 0.07));
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
 }
 
-/* PRODUCT INFORMATION */
+.product-emoji {
+  font-size: clamp(42px, 5vw, 58px);
+  filter: drop-shadow(0 5px 7px rgba(0, 0, 0, 0.07));
+}
+
+/* INFO */
 
 .product-info {
-  padding: 13px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .product-name {
-  color: var(--black);
+  color: #222222;
   font-size: 14px;
   font-weight: 800;
   line-height: 1.3;
@@ -846,10 +853,10 @@ main {
 .product-weight {
   color: #777777;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
-/* PRICE + ACTION */
+/* PRICE AREA */
 
 .product-bottom {
   margin-top: auto;
@@ -867,11 +874,11 @@ main {
   white-space: nowrap;
 }
 
-/* ADD BUTTON */
+/* ADD */
 
 .add-button {
   width: 76px;
-  height: 35px;
+  height: 36px;
   flex-shrink: 0;
 
   border: 1.5px solid var(--orange);
@@ -888,7 +895,7 @@ main {
   justify-content: center;
 
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: 0.15s ease;
 }
 
 .add-button:hover {
@@ -900,13 +907,11 @@ main {
   transform: scale(0.96);
 }
 
-/* =====================================================
-   PROFESSIONAL QUANTITY CONTROL
-===================================================== */
+/* QUANTITY */
 
 .quantity-control {
-  width: 80px;
-  height: 35px;
+  width: 82px;
+  height: 36px;
   flex-shrink: 0;
 
   display: flex;
@@ -920,8 +925,8 @@ main {
 }
 
 .quantity-control button {
-  width: 27px;
-  height: 35px;
+  width: 28px;
+  height: 36px;
 
   border: 0;
   background: var(--orange);
@@ -944,13 +949,48 @@ main {
 
 .quantity-control span {
   flex: 1;
-
   text-align: center;
 
   color: #222222;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
 }
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .product-info {
+    padding: 10px;
+  }
+
+  .product-name {
+    font-size: 13px;
+  }
+
+  .product-weight {
+    font-size: 11px;
+  }
+
+  .product-price {
+    font-size: 15px;
+  }
+
+  .add-button {
+    width: 70px;
+    height: 34px;
+  }
+
+  .quantity-control {
+    width: 76px;
+    height: 34px;
+  }
+
+  .quantity-control button {
+    width: 25px;
+    height: 34px;
+  }
+  }
     
 
 
