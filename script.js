@@ -89,7 +89,7 @@ function createProductCard(product) {
 
   const imageHTML = product.image
     ? `<img src="${product.image}" alt="${product.name}" loading="lazy">`
-    : `<div class="product-placeholder">🛒</div>`;
+    : `<div class="product-emoji">🛒</div>`;
 
   const outOfStock = Number(product.stock) <= 0;
 
@@ -112,72 +112,83 @@ function createProductCard(product) {
           ${product.brand || ""}
         </span>
 
-        <h3>${product.name}</h3>
+        <h3 class="product-name">
+          ${product.name}
+        </h3>
 
-        <span class="product-unit">
+        <span class="product-weight">
           ${product.unit || ""}
         </span>
 
-        <div class="price-row">
+        <div class="product-bottom">
 
           <div class="price-box">
-            <strong>${formatPrice(product.price)}</strong>
+
+            <strong class="product-price">
+              ${formatPrice(product.price)}
+            </strong>
 
             ${
               product.mrp > product.price
                 ? `<del>${formatPrice(product.mrp)}</del>`
                 : ""
             }
+
           </div>
 
-        </div>
-
-        ${
-          outOfStock
-            ? `
-              <button class="add-button disabled" disabled>
-                OUT OF STOCK
-              </button>
-            `
-            : quantity > 0
+          ${
+            outOfStock
               ? `
-                <div class="quantity-control">
-
-                  <button
-                    type="button"
-                    onclick="changeQuantity(${product.id}, -1)"
-                  >
-                    −
-                  </button>
-
-                  <span>${quantity}</span>
-
-                  <button
-                    type="button"
-                    onclick="changeQuantity(${product.id}, 1)"
-                  >
-                    +
-                  </button>
-
-                </div>
-              `
-              : `
                 <button
-                  class="add-button"
+                  class="add-button disabled"
                   type="button"
-                  onclick="addToCart(${product.id})"
+                  disabled
                 >
-                  ADD
+                  OUT OF STOCK
                 </button>
               `
-        }
+              : quantity > 0
+                ? `
+                  <div class="quantity-control">
+
+                    <button
+                      type="button"
+                      onclick="changeQuantity(${product.id}, -1)"
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+
+                    <span>${quantity}</span>
+
+                    <button
+                      type="button"
+                      onclick="changeQuantity(${product.id}, 1)"
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+
+                  </div>
+                `
+                : `
+                  <button
+                    class="add-button"
+                    type="button"
+                    onclick="addToCart(${product.id})"
+                  >
+                    ADD
+                  </button>
+                `
+          }
+
+        </div>
 
       </div>
 
     </article>
   `;
-}
-
+             }
 /* ---------- Render Products ---------- */
 
 function renderProducts() {
