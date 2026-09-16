@@ -18,60 +18,55 @@
 
   <!-- ================= HEADER ================= -->
 
-  <header class="header">
+  <header class="site-header">
+
     <div class="header-inner">
 
-      <button class="brand"
-              type="button"
-              onclick="goHome()"
-              aria-label="Go to home">
+      <button class="brand" onclick="goHome()" type="button">
 
-        <img
-          src="logo.png"
-          alt="Shree Harikrishna Supermart"
-          class="brand-logo"
-        >
+        <div class="brand-logo">
+          <span>SH</span>
+        </div>
 
         <div class="brand-text">
           <strong>Shree Harikrishna</strong>
           <span>Supermart</span>
-          <small>📍 Blue City, Sarthana, Surat</small>
         </div>
 
       </button>
 
-
       <button
         class="header-cart"
-        type="button"
         onclick="openCart()"
+        type="button"
       >
-        🛒
+        <span>🛒</span>
         <span>Cart</span>
         <b id="headerCartCount">0</b>
       </button>
 
     </div>
+
   </header>
 
 
-  <!-- ================= DELIVERY STRIP ================= -->
+  <!-- ================= DELIVERY BAR ================= -->
 
-  <div class="delivery-strip">
+  <div class="delivery-bar">
 
-    <div class="delivery-strip-inner">
+    <div class="delivery-bar-inner">
 
       <span>🚴</span>
 
-      <strong>Delivery in 30–45 minutes</strong>
+      <strong>Delivery in 30–45 min</strong>
 
-      <i>•</i>
+      <span class="delivery-dot">•</span>
 
-      <strong>Above ₹500 FREE DELIVERY</strong>
+      <strong>₹500+ FREE DELIVERY</strong>
 
-      <i>•</i>
+      <span class="delivery-dot">•</span>
 
-      <span>Up to 3 km</span>
+      <span>Within 3 km</span>
 
     </div>
 
@@ -86,80 +81,77 @@
 
     <section class="hero">
 
-      <div class="hero-copy">
+      <div class="hero-content">
 
         <span class="eyebrow">
           SHREE HARIKRISHNA SUPERMART
         </span>
 
         <h1>
-          Daily essentials,<br>
-          <em>delivered fast.</em>
+          Your everyday essentials,
+          <span>delivered fast.</span>
         </h1>
 
         <p>
-          Groceries, dairy, bakery, snacks, beverages and
-          household essentials — all in one place.
+          Groceries, dairy, bakery, snacks, beverages
+          and household essentials — all in one place.
         </p>
 
         <button
-          class="hero-button"
-          type="button"
+          class="primary-button hero-button"
           onclick="scrollToProducts()"
+          type="button"
         >
-          Shop Now →
+          Shop Now <span>→</span>
         </button>
 
       </div>
 
-
-      <div class="hero-art" aria-hidden="true">
+      <div class="hero-visual">
 
         <div class="hero-circle"></div>
 
-        <span>🥦</span>
-        <span>🍞</span>
-        <span>🥛</span>
-        <span>🥫</span>
-        <span>🍪</span>
+        <span class="floating-product product-one">🥦</span>
+        <span class="floating-product product-two">🍞</span>
+        <span class="floating-product product-three">🥛</span>
+        <span class="floating-product product-four">🍪</span>
 
-        <div class="hero-cart">🛒</div>
+        <div class="hero-basket">
+          🛒
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ================= SEARCH ================= -->
+    <!-- SEARCH -->
 
     <section class="search-section">
 
-      <div class="search-box" id="searchBox">
+      <div class="search-container">
 
-        <span class="search-icon">⌕</span>
+        <div class="search-box">
 
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Search products..."
-          autocomplete="off"
-          aria-label="Search products"
-        >
+          <span class="search-icon">⌕</span>
 
-        <!-- ONLY ONE CLEAR BUTTON -->
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search products..."
+            autocomplete="off"
+          >
 
-        <button
-          id="clearSearch"
-          class="clear-search"
-          type="button"
-          onclick="clearSearch()"
-          aria-label="Clear search"
-        >
-          ×
-        </button>
+          <button
+            id="clearSearch"
+            class="clear-search"
+            onclick="clearSearch()"
+            type="button"
+          >
+            ×
+          </button>
 
-
-        <!-- SEARCH SUGGESTIONS -->
+        </div>
 
         <div
           id="searchSuggestions"
@@ -171,22 +163,15 @@
     </section>
 
 
-    <!-- ================= CATEGORIES ================= -->
+    <!-- CATEGORIES -->
 
     <section class="categories-section">
 
       <div class="section-heading">
 
         <div>
-
-          <span class="section-label">
-            SHOP
-          </span>
-
-          <h2>
-            Shop by Category
-          </h2>
-
+          <span class="section-label">SHOP</span>
+          <h2>Shop by Category</h2>
         </div>
 
       </div>
@@ -198,14 +183,10 @@
           class="category-card active"
           data-category="all"
           onclick="filterCategory('all')"
+          type="button"
         >
-
           <span class="category-icon">🛒</span>
-
-          <strong>
-            All Products
-          </strong>
-
+          <strong>All Products</strong>
         </button>
 
 
@@ -213,14 +194,10 @@
           class="category-card"
           data-category="grocery"
           onclick="filterCategory('grocery')"
+          type="button"
         >
-
           <span class="category-icon">🥫</span>
-
-          <strong>
-            Grocery & Kitchen
-          </strong>
-
+          <strong>Grocery & Kitchen</strong>
         </button>
 
 
@@ -228,14 +205,10 @@
           class="category-card"
           data-category="dairy"
           onclick="filterCategory('dairy')"
+          type="button"
         >
-
           <span class="category-icon">🧈</span>
-
-          <strong>
-            Dairy
-          </strong>
-
+          <strong>Dairy</strong>
         </button>
 
 
@@ -243,14 +216,10 @@
           class="category-card"
           data-category="bakery"
           onclick="filterCategory('bakery')"
+          type="button"
         >
-
           <span class="category-icon">🍞</span>
-
-          <strong>
-            Bakery
-          </strong>
-
+          <strong>Bakery</strong>
         </button>
 
 
@@ -258,14 +227,10 @@
           class="category-card"
           data-category="snacks"
           onclick="filterCategory('snacks')"
+          type="button"
         >
-
           <span class="category-icon">🍟</span>
-
-          <strong>
-            Snacks
-          </strong>
-
+          <strong>Snacks</strong>
         </button>
 
 
@@ -273,14 +238,10 @@
           class="category-card"
           data-category="beverages"
           onclick="filterCategory('beverages')"
+          type="button"
         >
-
           <span class="category-icon">🥤</span>
-
-          <strong>
-            Beverages
-          </strong>
-
+          <strong>Beverages</strong>
         </button>
 
 
@@ -288,14 +249,10 @@
           class="category-card"
           data-category="household"
           onclick="filterCategory('household')"
+          type="button"
         >
-
           <span class="category-icon">🧹</span>
-
-          <strong>
-            Household Essentials
-          </strong>
-
+          <strong>Household Essentials</strong>
         </button>
 
       </div>
@@ -303,7 +260,7 @@
     </section>
 
 
-    <!-- ================= PRODUCTS ================= -->
+    <!-- PRODUCTS -->
 
     <section
       class="products-section"
@@ -313,7 +270,6 @@
       <div class="products-heading">
 
         <div>
-
           <span class="section-label">
             FRESH & AFFORDABLE
           </span>
@@ -321,12 +277,11 @@
           <h2 id="productsTitle">
             Popular Products
           </h2>
-
         </div>
 
         <span
-          class="product-count"
           id="productCount"
+          class="product-count"
         >
           0 products
         </span>
@@ -340,19 +295,15 @@
       ></div>
 
 
-      <!-- NO PRODUCTS -->
-
       <div
         id="noProducts"
         class="no-products"
         hidden
       >
 
-        <div>🔍</div>
+        <div class="no-products-icon">🔍</div>
 
-        <h3>
-          No products found
-        </h3>
+        <h3>No products found</h3>
 
         <p>
           Try another product or category.
@@ -360,8 +311,8 @@
 
         <button
           class="primary-button"
-          type="button"
           onclick="resetProducts()"
+          type="button"
         >
           Show All Products
         </button>
@@ -371,17 +322,17 @@
     </section>
 
 
-    <!-- ================= DELIVERY ================= -->
+    <!-- DELIVERY INFO -->
 
     <section class="delivery-section">
 
       <div class="delivery-card">
 
-        <div class="delivery-icon">
+        <div class="delivery-card-icon">
           🚴
         </div>
 
-        <div>
+        <div class="delivery-card-content">
 
           <span class="section-label">
             LOCAL DELIVERY
@@ -392,24 +343,15 @@
           </h2>
 
           <p>
-            We deliver your daily essentials within
-            approximately 30–45 minutes.
+            Get your daily essentials delivered
+            to your doorstep within our service area.
           </p>
-
 
           <div class="delivery-points">
 
-            <span>
-              ✓ Up to 3 km
-            </span>
-
-            <span>
-              ✓ Above ₹500 FREE
-            </span>
-
-            <span>
-              ✓ 7:00 AM – 9:00 PM
-            </span>
+            <span>✓ Up to 3 km</span>
+            <span>✓ ₹500+ FREE</span>
+            <span>✓ 7:00 AM – 9:00 PM</span>
 
           </div>
 
@@ -422,7 +364,7 @@
   </main>
 
 
-  <!-- ================= CATEGORY FULL SCREEN ================= -->
+  <!-- ================= CATEGORY PAGE ================= -->
 
   <section
     id="categoryPage"
@@ -433,16 +375,14 @@
     <div class="category-page-header">
 
       <button
-        class="category-back"
-        type="button"
+        class="back-button"
         onclick="closeCategoryPage()"
-        aria-label="Back"
+        type="button"
       >
         ←
       </button>
 
-
-      <div>
+      <div class="category-page-title">
 
         <span class="section-label">
           CATEGORY
@@ -458,19 +398,13 @@
 
       </div>
 
-
       <button
-        class="category-header-cart"
-        type="button"
+        class="category-cart-button"
         onclick="openCart()"
+        type="button"
       >
-
         🛒
-
-        <b id="categoryCartCount">
-          0
-        </b>
-
+        <b id="categoryCartCount">0</b>
       </button>
 
     </div>
@@ -478,7 +412,7 @@
 
     <div
       id="categoryProductsGrid"
-      class="category-products-container"
+      class="category-products-grid"
     ></div>
 
   </section>
@@ -492,7 +426,7 @@
     hidden
   >
 
-    <div>
+    <div class="bottom-cart-info">
 
       <strong id="bottomCartItems">
         0 items
@@ -504,10 +438,9 @@
 
     </div>
 
-
     <button
-      type="button"
       onclick="openCart()"
+      type="button"
     >
       View Cart →
     </button>
@@ -528,30 +461,22 @@
       class="cart-modal"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="cartTitle"
     >
-
 
       <div class="cart-header">
 
         <div>
-
           <span class="section-label">
             YOUR ORDER
           </span>
 
-          <h2 id="cartTitle">
-            Your Cart
-          </h2>
-
+          <h2>Your Cart</h2>
         </div>
-
 
         <button
           class="close-cart"
-          type="button"
           onclick="closeCart()"
-          aria-label="Close cart"
+          type="button"
         >
           ×
         </button>
@@ -559,15 +484,11 @@
       </div>
 
 
-      <!-- CART ITEMS -->
-
       <div
         id="cartItems"
         class="cart-items"
       ></div>
 
-
-      <!-- EMPTY CART -->
 
       <div
         id="emptyCart"
@@ -578,9 +499,7 @@
           🛒
         </div>
 
-        <h3>
-          Your cart is empty
-        </h3>
+        <h3>Your cart is empty</h3>
 
         <p>
           Add some products to your cart.
@@ -588,16 +507,14 @@
 
         <button
           class="primary-button"
-          type="button"
           onclick="closeCart(); scrollToProducts()"
+          type="button"
         >
           Start Shopping
         </button>
 
       </div>
 
-
-      <!-- CART SUMMARY -->
 
       <div
         id="cartSummary"
@@ -606,9 +523,7 @@
 
         <div class="summary-row">
 
-          <span>
-            Subtotal
-          </span>
+          <span>Subtotal</span>
 
           <strong id="cartSubtotal">
             ₹0
@@ -619,9 +534,7 @@
 
         <div class="summary-row">
 
-          <span>
-            Delivery
-          </span>
+          <span>Delivery</span>
 
           <strong>
             Calculated at checkout
@@ -637,9 +550,7 @@
 
         <div class="summary-total">
 
-          <span>
-            Total
-          </span>
+          <span>Total</span>
 
           <strong id="cartTotal">
             ₹0
@@ -650,8 +561,8 @@
 
         <button
           class="checkout-button"
-          type="button"
           onclick="checkout()"
+          type="button"
         >
           Proceed to Checkout →
         </button>
@@ -665,34 +576,49 @@
 
   <!-- ================= FOOTER ================= -->
 
-  <footer>
+  <footer class="site-footer">
 
-    <div class="footer-brand">
+    <div class="footer-main">
 
-      <img
-        src="logo.png"
-        alt=""
-        class="footer-logo"
-      >
+      <div class="footer-brand">
 
-      <div>
+        <div class="footer-logo">
+          SH
+        </div>
 
-        <strong>
-          Shree Harikrishna Supermart
-        </strong>
+        <div>
 
-        <span>
-          Fresh • Quality • Everyday
-        </span>
+          <strong>
+            Shree Harikrishna Supermart
+          </strong>
+
+          <span>
+            Fresh • Quality • Everyday
+          </span>
+
+        </div>
 
       </div>
+
+
+      <p>
+        Fast delivery • Quality products • Local service
+      </p>
 
     </div>
 
 
-    <p>
-      Fastest delivery • Quality products • Local service
-    </p>
+    <div class="footer-bottom">
+
+      <span>
+        📍 Blue City, Sarthana, Surat
+      </span>
+
+      <span>
+        7:00 AM – 9:00 PM
+      </span>
+
+    </div>
 
 
     <p class="copyright">
@@ -702,7 +628,8 @@
   </footer>
 
 
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- ================= SCRIPTS ================= -->
+
   <script src="products.js"></script>
   <script src="script.js"></script>
 
