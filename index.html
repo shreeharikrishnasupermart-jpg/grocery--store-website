@@ -417,7 +417,202 @@
 
   </section>
 
+<!-- ================= PRODUCT DETAIL PAGE ================= -->
 
+<section
+  id="productDetailPage"
+  class="product-detail-page"
+  aria-hidden="true"
+>
+
+  <div class="product-detail-header">
+
+    <button
+      class="back-button"
+      onclick="closeProductDetail()"
+      type="button"
+    >
+      ←
+    </button>
+
+    <div class="product-detail-header-title">
+      <span class="section-label">PRODUCT</span>
+      <h2>Product Details</h2>
+    </div>
+
+    <button
+      class="category-cart-button"
+      onclick="openCart()"
+      type="button"
+    >
+      🛒
+      <b id="detailCartCount">0</b>
+    </button>
+
+  </div>
+
+
+  <div class="product-detail-container">
+
+    <!-- PRODUCT IMAGE -->
+
+    <div class="product-detail-image">
+
+      <div id="detailDiscount"></div>
+
+      <div id="detailImage"></div>
+
+    </div>
+
+
+    <!-- PRODUCT INFORMATION -->
+
+    <div class="product-detail-info">
+
+      <span
+        id="detailBrand"
+        class="product-detail-brand"
+      >
+      </span>
+
+
+      <h1 id="detailName">
+        Product Name
+      </h1>
+
+
+      <p
+        id="detailUnit"
+        class="product-detail-unit"
+      >
+      </p>
+
+
+      <div class="product-detail-price">
+
+        <strong id="detailPrice">
+          ₹0
+        </strong>
+
+        <del id="detailMrp">
+          ₹0
+        </del>
+
+        <span
+          id="detailDiscountText"
+          class="detail-discount-text"
+        >
+        </span>
+
+      </div>
+
+
+      <!-- QUANTITY -->
+
+      <div class="detail-action-area">
+
+        <div
+          id="detailQuantityControl"
+          class="quantity-control detail-quantity"
+        >
+
+          <button
+            type="button"
+            onclick="changeDetailQuantity(-1)"
+          >
+            −
+          </button>
+
+          <span id="detailQuantity">
+            0
+          </span>
+
+          <button
+            type="button"
+            onclick="changeDetailQuantity(1)"
+          >
+            +
+          </button>
+
+        </div>
+
+
+        <button
+          id="detailAddButton"
+          class="detail-add-button"
+          type="button"
+          onclick="addDetailProductToCart()"
+        >
+          ADD TO CART
+        </button>
+
+      </div>
+
+
+      <!-- DELIVERY -->
+
+      <div class="detail-delivery-box">
+
+        <div class="detail-delivery-item">
+
+          <span>🚴</span>
+
+          <div>
+            <strong>Fast Delivery</strong>
+            <p>Delivery in 30–45 min</p>
+          </div>
+
+        </div>
+
+
+        <div class="detail-delivery-item">
+
+          <span>📍</span>
+
+          <div>
+            <strong>Service Area</strong>
+            <p>Within 3 km of our store</p>
+          </div>
+
+        </div>
+
+
+        <div class="detail-delivery-item">
+
+          <span>🎉</span>
+
+          <div>
+            <strong>Free Delivery</strong>
+            <p>On orders above ₹500</p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT INFORMATION -->
+
+      <div class="detail-information">
+
+        <span class="section-label">
+          PRODUCT INFORMATION
+        </span>
+
+        <h2>About this product</h2>
+
+        <p id="detailDescription">
+          Quality product available at
+          Shree Harikrishna Supermart.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
   <!-- ================= BOTTOM CART ================= -->
 
   <div
