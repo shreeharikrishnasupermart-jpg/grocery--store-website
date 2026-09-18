@@ -10,7 +10,7 @@ const CART_KEY = "shreeHarikrishnaCart";
 
 let cart = [];
 let currentCategory = "all";
-
+let currentDetailProductId = null;
 
 /* ================= LOAD CART ================= */
 
@@ -232,7 +232,7 @@ function createProductCard(product) {
 
         <button
           type="button"
-          onclick="changeQuantity(${product.id}, -1)"
+          onclick="event.stopPropagation(); changeQuantity(${product.id}, 1)"
         >
           −
         </button>
@@ -241,7 +241,7 @@ function createProductCard(product) {
 
         <button
           type="button"
-          onclick="changeQuantity(${product.id}, 1)"
+          onclick="event.stopPropagation(); changeQuantity(${product.id}, -1)"
         >
           +
         </button>
@@ -253,7 +253,7 @@ function createProductCard(product) {
       <button
         class="add-button"
         type="button"
-        onclick="addToCart(${product.id})"
+        onclick="event.stopPropagation(); addToCart(${product.id})"
       >
         ADD
       </button>
@@ -261,8 +261,10 @@ function createProductCard(product) {
   }
 
   return `
-    <article class="product-card">
-
+    <article
+      class="product-card"
+      onclick="openProductDetail(${product.id})"
+    >
       <div class="product-image">
 
         ${getProductImage(product)}
@@ -380,7 +382,285 @@ function renderProducts() {
   updateCartUI();
 }
 
+/* ================= PRODUCT DETAIL ================= */
 
+function openProductDetail(id) {
+  const product = getProduct(id);
+
+  if (!product) {
+    return;
+  }
+
+  currentDetailProductId = Number(id);
+
+  const page = document.getElementById("productDetailPage");
+
+  if (!page) {
+    return;
+  }
+
+  const price = Number(product.price) || 0;
+  const mrp = Number(product.mrp) || 0;
+  const stock = Number(product.stock) || 0;
+
+  let discount = Number(product.discount) || 0;
+
+  if (!discount && mrp > price) {
+    discount = Math.round(
+      ((mrp - price) / mrp) * 100
+    );
+  }
+
+  const detailBrand =
+    document.getElementById("detailBrand");
+
+  const detailName =
+    document.getElementById("detailName");
+
+  const detailUnit =
+    document.getElementById("detailUnit");
+
+  const detailPrice =
+    document.getElementById("detailPrice");
+
+  const detailMrp =
+    document.getElementById("detailMrp");
+
+  const detailDiscount =
+    document.getElementById("detailDiscount");
+
+  const detailDiscountText =
+    document.getElementById("detailDiscountText");
+
+  const detailImage =
+    document.getElementById("detailImage");
+
+  const detailDescription =
+    document.getElementById("detailDescription");
+
+  const quantityControl =
+    document.getElementById("detailQuantityControl");
+
+  const quantity =
+    document.getElementById("detailQuantity");
+
+  const addButton =
+    document.getElementById("detailAddButton");
+
+  if (detailBrand) {
+    detailBrand.textContent =
+      product.brand || "";
+  }
+
+  if (detailName) {
+    detailName.textContent =
+      product.name || "";
+  }
+
+  if (detailUnit) {
+    detailUnit.textContent =
+      product.unit || "";
+  }
+
+  if (detailPrice) {
+    detailPrice.textContent =
+      formatPrice(price);
+  }
+
+  if (detailMrp) {
+    if (mrp > price) {
+      detailMrp.textContent =
+        formatPrice(mrp);
+      detailMrp.style.display = "inline";
+    } else {
+      detailMrp.style.display = "none";
+    }
+  }
+
+  if (detailDiscount) {
+    detailDiscount.innerHTML =
+      discount > 0
+        ? `<span class="discount-badge">${discount}% OFF</span>`
+        : "";
+  }
+
+  if (detailDiscountText) {
+    detailDiscountText.textContent =
+      discount > 0
+        ? `${discount}% OFF`
+        : "";
+  }
+
+  if (detailImage) {
+    detailImage.innerHTML =
+      getProductImage(product);
+  }
+
+  if (detailDescription) {
+    detailDescription.textContent =
+      product.description ||
+      `${product.name} available at Shree Harikrishna Supermart.`;
+  }
+
+  const cartQuantity =
+    getCartQuantity(product.id);
+
+  if (quantity) {
+    quantity.textContent =
+      cartQuantity;
+  }
+
+  if (stock <= 0) {
+    if (quantityControl) {
+      quantityControl.style.display = "none";
+    }
+
+    if (addButton) {
+      addButton.style.display = "block";
+      addButton.disabled = true;
+      addButton.textContent = "OUT OF STOCK";
+    }
+  } else if (cartQuantity > 0) {
+    if (quantityControl) {
+      quantityControl.style.display = "flex";
+    }
+
+    if (addButton) {
+      addButton.style.display = "none";
+    }
+  } else {
+    if (quantityControl) {
+      quantityControl.style.display = "none";
+    }
+
+    if (addButton) {
+      addButton.style.display = "block";
+      addButton.disabled = false;
+      addButton.textContent = "ADD TO CART";
+    }
+  }
+
+  page.classList.add("open");
+
+  page.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "category-open"
+  );
+
+  updateCartUI();
+}
+
+
+function closeProductDetail() {
+  const page =
+    document.getElementById("productDetailPage");
+
+  if (!page) {
+    return;
+  }
+
+  page.classList.remove("open");
+
+  page.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  currentDetailProductId = null;
+
+  const categoryPage =
+    document.getElementById("categoryPage");
+
+  if (
+    categoryPage &&
+    categoryPage.classList.contains("open")
+  ) {
+    document.body.classList.add(
+      "category-open"
+    );
+  } else {
+    document.body.classList.remove(
+      "category-open"
+    );
+  }
+}
+
+
+function updateDetailCartCount() {
+  const count =
+    document.getElementById("detailCartCount");
+
+  if (count) {
+    count.textContent =
+      getCartItemCount();
+  }
+}
+
+
+function addDetailProductToCart() {
+  if (!currentDetailProductId) {
+    return;
+  }
+
+  addToCart(
+    currentDetailProductId
+  );
+
+  openProductDetail(
+    currentDetailProductId
+  );
+}
+
+
+function changeDetailQuantity(change) {
+  if (!currentDetailProductId) {
+    return;
+  }
+
+  const product =
+    getProduct(currentDetailProductId);
+
+  if (!product) {
+    return;
+  }
+
+  const currentQuantity =
+    getCartQuantity(
+      currentDetailProductId
+    );
+
+  if (
+    change > 0 &&
+    currentQuantity === 0
+  ) {
+    addToCart(
+      currentDetailProductId
+    );
+  } else if (
+    change > 0
+  ) {
+    changeQuantity(
+      currentDetailProductId,
+      1
+    );
+  } else if (
+    change < 0 &&
+    currentQuantity > 0
+  ) {
+    changeQuantity(
+      currentDetailProductId,
+      -1
+    );
+  }
+
+  openProductDetail(
+    currentDetailProductId
+  );
+}
 /* ================= FULL CATEGORY PAGE ================= */
 
 function openCategoryPage(category) {
