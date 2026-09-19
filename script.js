@@ -1079,15 +1079,10 @@ function renderCart() {
     }).join("");
 
   const amount = getCartTotal();
-
-  if (subtotal) {
-    subtotal.textContent =
-      formatPrice(amount);
-  }
-
-  if (total) {
-    total.textContent =
-      formatPrice(amount);
+  const deliveryCharge = currentDeliveryCharge;
+const finalTotal = amount + deliveryCharge;
+  if (subtotal) subtotal.textContent = formatPrice(amount);
+if (total) total.textContent = formatPrice(finalTotal);
   }
 
   updateDetailCartCount();
@@ -1518,7 +1513,8 @@ async function checkDeliveryAvailability() {
       subtotal,
       location.distanceKm
     );
-
+   currentDeliveryDistance = location.distanceKm;
+currentDeliveryCharge = quote.available ? quote.charge : 0;
     const distanceText =
       location.distanceKm.toFixed(2);
 
