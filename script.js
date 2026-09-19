@@ -1498,3 +1498,60 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSearch();
   updateCategoryButtons();
 });
+async function checkDeliveryAvailability() {
+  const button = document.getElementById("checkDeliveryButton");
+  const message = document.getElementById("deliveryLocationMessage");
+
+  if (!button || !message) return;
+
+  button.disabled = true;
+  button.textContent = "CHECKING...";
+
+  message.textContent = "📍 Getting your location...";
+
+  try {
+    const location = await getCustomerLocation();
+
+    const subtotal = getCartTotal();
+
+    const quote = getDeliveryQuote(
+      subtotal,
+      location.distanceKm
+    );
+
+    const distanceText =
+      location.distanceKm.toFixed(2);
+
+    if (!quote.available) {
+      message.innerHTML =
+        `📍 You are ${distanceText} km away.<br>` +
+        `❌ ${quote.message}`;
+
+      button.textContent = "CHECK AGAIN";
+      return;
+    }
+
+    if (quote.charge === 0) {
+      message.innerHTML =
+        `📍 Distance: ${distanceText} km<br>` +
+        `🎉 <strong>Free Delivery</strong>`;
+    } else {
+      message.innerHTML =
+        `📍 Distance: ${distanceText} km<br>` +
+        `🚴 ${quote.message}`;
+    }
+
+    button.textContent = "LOCATION CHECKED";
+
+  } catch (error) {
+
+    message.innerHTML =
+      "⚠️ Location permission મળી નથી.<br>" +
+      "Please allow location access and try again.";
+
+    button.textContent = "TRY AGAIN";
+
+  } finally {
+    button.disabled = false;
+  }
+}
