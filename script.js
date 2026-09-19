@@ -226,29 +226,29 @@ function createProductCard(product) {
         OUT OF STOCK
       </button>
     `;
-  } else if (quantity > 0) {
-    actionHTML = `
-      <div class="quantity-control">
+ } else if (quantity > 0) {
+  actionHTML = `
+    <div class="quantity-control">
 
-        <button
-          type="button"
-          onclick="event.stopPropagation(); changeQuantity(${product.id}, 1)"
-        >
-          −
-        </button>
+      <button
+        type="button"
+        onclick="event.stopPropagation(); decreaseQuantity(${product.id})"
+      >
+        −
+      </button>
 
-        <span>${quantity}</span>
+      <span>${quantity}</span>
 
-        <button
-          type="button"
-          onclick="event.stopPropagation(); changeQuantity(${product.id}, -1)"
-        >
-          +
-        </button>
+      <button
+        type="button"
+        onclick="event.stopPropagation(); increaseQuantity(${product.id})"
+      >
+        +
+      </button>
 
-      </div>
-    `;
-  } else {
+    </div>
+  `;
+  }  else {
     actionHTML = `
       <button
         class="add-button"
@@ -848,7 +848,13 @@ function changeQuantity(id, change) {
 
   renderCart();
 }
+function increaseQuantity(id) {
+  changeQuantity(id, 1);
+}
 
+function decreaseQuantity(id) {
+  changeQuantity(id, -1);
+}
 
 /* ================= REMOVE FROM CART ================= */
 
