@@ -1333,25 +1333,16 @@ function resetProducts() {
 /* ================= FUTURE DELIVERY SYSTEM ================= */
 
 const DELIVERY_CONFIG = {
+  shopLat: 21.225238,
+  shopLng: 72.897410,
+
   radiusKm: 3,
   freeDeliveryAbove: 500,
 
   charges: [
-    {
-      minKm: 0,
-      maxKm: 1,
-      charge: 10
-    },
-    {
-      minKm: 1,
-      maxKm: 2,
-      charge: 20
-    },
-    {
-      minKm: 2,
-      maxKm: 3,
-      charge: 30
-    }
+    { minKm: 0, maxKm: 1, charge: 10 },
+    { minKm: 1, maxKm: 2, charge: 20 },
+    { minKm: 2, maxKm: 3, charge: 30 }
   ],
 
   shopMapsUrl:
@@ -1359,15 +1350,32 @@ const DELIVERY_CONFIG = {
 };
 
 
-function getDeliveryQuote(subtotal, distanceKm) {
+function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+  const earthRadius = 6371;
 
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) *
+    Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(
+    Math.sqrt(a),
+    Math.sqrt(1 - a)
+  );
+
+  return earthRadius * c;
+}
+
+
+function getDeliveryQuote(subtotal, distanceKm) {
   subtotal = Number(subtotal) || 0;
   distanceKm = Number(distanceKm);
 
-  if (
-    !Number.isFinite(distanceKm) ||
-    distanceKm < 0
-  ) {
+  if (!Number.isFinite(distanceKm) || distanceKm < 0) {
     return {
       available: false,
       charge: 0,
@@ -1379,15 +1387,11 @@ function getDeliveryQuote(subtotal, distanceKm) {
     return {
       available: false,
       charge: 0,
-      message:
-        "Sorry, delivery is available only within 3 km."
+      message: "Sorry, delivery is available only within 3 km."
     };
   }
 
-  if (
-    subtotal >=
-    DELIVERY_CONFIG.freeDeliveryAbove
-  ) {
+  if (subtotal >= DELIVERY_CONFIG.freeDeliveryAbove) {
     return {
       available: true,
       charge: 0,
@@ -1395,30 +1399,64 @@ function getDeliveryQuote(subtotal, distanceKm) {
     };
   }
 
-  const slab =
-    DELIVERY_CONFIG.charges.find(
-      item =>
-        distanceKm >= item.minKm &&
-        distanceKm <= item.maxKm
-    );
+  let charge = 30;
 
-  if (!slab) {
-    return {
-      available: false,
-      charge: 0,
-      message:
-        "Delivery is not available for this distance."
-    };
+  if (distanceKm < 1) {
+    charge = 10;
+  } else if (distanceKm < 2) {
+    charge = 20;
+  } else {
+    charge = 30;
   }
 
   return {
     available: true,
-    charge: slab.charge,
-    message:
-      `Delivery Charge ₹${slab.charge}`
+    charge: charge,
+    message: `Delivery Charge ₹${charge}`
   };
 }
 
+
+function getCustomerLocation() {
+  return new Promise((resolve, reject) => {
+
+    if (!navigator.geolocation) {
+      reject(new Error("Location is not supported on this device."));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+
+        const customerLat = position.coords.latitude;
+        const customerLng = position.coords.longitude;
+
+        const distanceKm = calculateDistanceKm(
+          DELIVERY_CONFIG.shopLat,
+          DELIVERY_CONFIG.shopLng,
+          customerLat,
+          customerLng
+        );
+
+        resolve({
+          latitude: customerLat,
+          longitude: customerLng,
+          distanceKm: distanceKm
+        });
+      },
+
+      error => {
+        reject(error);
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000
+      }
+    );
+  });
+     }
 /* ================= REFRESH WEBSITE ================= */
 
 function refreshWebsite() {
