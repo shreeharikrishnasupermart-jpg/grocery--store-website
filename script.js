@@ -1005,6 +1005,7 @@ function renderCart() {
 
   cartItems.innerHTML =
     items.map(item => {
+
       const image = item.image
         ? `
           <img
@@ -1013,8 +1014,12 @@ function renderCart() {
           >
         `
         : `
-          <span>🛒</span>
+          <span class="cart-placeholder">🛒</span>
         `;
+
+      const itemTotal =
+        Number(item.price) *
+        Number(item.quantity);
 
       return `
         <div class="cart-item">
@@ -1029,13 +1034,19 @@ function renderCart() {
 
             <span>${item.unit || ""}</span>
 
-            <b>${formatPrice(item.price)}</b>
+            <div class="cart-item-price-row">
+              <b>${formatPrice(item.price)}</b>
+
+              <span class="cart-item-total">
+                ${formatPrice(itemTotal)}
+              </span>
+            </div>
 
             <div class="cart-quantity">
 
               <button
                 type="button"
-                onclick="changeQuantity(${item.id}, -1)"
+                onclick="decreaseQuantity(${item.id})"
               >
                 −
               </button>
@@ -1044,7 +1055,7 @@ function renderCart() {
 
               <button
                 type="button"
-                onclick="changeQuantity(${item.id}, 1)"
+                onclick="increaseQuantity(${item.id})"
               >
                 +
               </button>
@@ -1057,14 +1068,15 @@ function renderCart() {
             class="remove-cart-item"
             type="button"
             onclick="removeFromCart(${item.id})"
+            aria-label="Remove ${item.name}"
           >
             ×
           </button>
 
         </div>
       `;
-    }).join("");
 
+    }).join("");
 
   const amount = getCartTotal();
 
@@ -1077,7 +1089,10 @@ function renderCart() {
     total.textContent =
       formatPrice(amount);
   }
+
+  updateDetailCartCount();
 }
+
 
 
 /* ================= OPEN CART ================= */
