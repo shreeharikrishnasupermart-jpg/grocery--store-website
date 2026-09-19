@@ -1335,51 +1335,89 @@ function resetProducts() {
 const DELIVERY_CONFIG = {
   radiusKm: 3,
   freeDeliveryAbove: 500,
+
+  charges: [
+    {
+      minKm: 0,
+      maxKm: 1,
+      charge: 10
+    },
+    {
+      minKm: 1,
+      maxKm: 2,
+      charge: 20
+    },
+    {
+      minKm: 2,
+      maxKm: 3,
+      charge: 30
+    }
+  ],
+
   shopMapsUrl:
     "https://maps.app.goo.gl/cnSDqA9XqGoD3yGy8"
 };
 
 
 function getDeliveryQuote(subtotal, distanceKm) {
-  const amount = Number(subtotal) || 0;
-  const distance = Number(distanceKm);
 
-  if (!Number.isFinite(distance)) {
+  subtotal = Number(subtotal) || 0;
+  distanceKm = Number(distanceKm);
+
+  if (
+    !Number.isFinite(distanceKm) ||
+    distanceKm < 0
+  ) {
     return {
-      available: null,
-      charge: null,
-      message:
-        "Delivery charge will be calculated at checkout."
+      available: false,
+      charge: 0,
+      message: "Delivery distance is not available."
     };
   }
 
-  if (distance > DELIVERY_CONFIG.radiusKm) {
+  if (distanceKm > DELIVERY_CONFIG.radiusKm) {
     return {
       available: false,
-      charge: null,
+      charge: 0,
       message:
-        "Delivery is available within 3 km."
+        "Sorry, delivery is available only within 3 km."
     };
   }
 
   if (
-    amount >= DELIVERY_CONFIG.freeDeliveryAbove
+    subtotal >=
+    DELIVERY_CONFIG.freeDeliveryAbove
   ) {
     return {
       available: true,
       charge: 0,
-      message: "FREE delivery"
+      message: "Free Delivery"
+    };
+  }
+
+  const slab =
+    DELIVERY_CONFIG.charges.find(
+      item =>
+        distanceKm >= item.minKm &&
+        distanceKm <= item.maxKm
+    );
+
+  if (!slab) {
+    return {
+      available: false,
+      charge: 0,
+      message:
+        "Delivery is not available for this distance."
     };
   }
 
   return {
     available: true,
-    charge: null,
+    charge: slab.charge,
     message:
-      "Delivery charge will be calculated from distance."
+      `Delivery Charge ₹${slab.charge}`
   };
 }
-
 
 /* ================= REFRESH WEBSITE ================= */
 
