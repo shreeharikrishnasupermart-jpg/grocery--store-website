@@ -1551,3 +1551,7 @@ currentDeliveryCharge = quote.available ? quote.charge : 0;
     button.disabled = false;
   }
 }
+document.addEventListener("DOMContentLoaded", function () {
+  renderProducts();
+  updateCartUI();
+});
