@@ -12,6 +12,9 @@ let cart = [];
 let currentCategory = "all";
 let currentDetailProductId = null;
 
+let currentDeliveryCharge = 0;
+let currentDeliveryDistance = null;
+
 /* ================= LOAD CART ================= */
 
 try {
@@ -972,6 +975,9 @@ function renderCart() {
   const subtotal =
     document.getElementById("cartSubtotal");
 
+  const deliveryChargeElement =
+    document.getElementById("cartDeliveryCharge");
+
   const total =
     document.getElementById("cartTotal");
 
@@ -1032,14 +1038,20 @@ function renderCart() {
 
             <strong>${item.name}</strong>
 
-            <span>${item.unit || ""}</span>
+            <span>
+              ${item.unit || ""}
+            </span>
 
             <div class="cart-item-price-row">
-              <b>${formatPrice(item.price)}</b>
+
+              <b>
+                ${formatPrice(item.price)}
+              </b>
 
               <span class="cart-item-total">
                 ${formatPrice(itemTotal)}
               </span>
+
             </div>
 
             <div class="cart-quantity">
@@ -1051,7 +1063,9 @@ function renderCart() {
                 −
               </button>
 
-              <span>${item.quantity}</span>
+              <span>
+                ${item.quantity}
+              </span>
 
               <button
                 type="button"
@@ -1079,15 +1093,42 @@ function renderCart() {
     }).join("");
 
   const amount = getCartTotal();
-  const deliveryCharge = currentDeliveryCharge;
-const finalTotal = amount + deliveryCharge;
-  if (subtotal) subtotal.textContent = formatPrice(amount);
-if (total) total.textContent = formatPrice(finalTotal);
+
+  const deliveryCharge =
+    Number(currentDeliveryCharge) || 0;
+
+  const finalTotal =
+    amount + deliveryCharge;
+
+  if (subtotal) {
+    subtotal.textContent =
+      formatPrice(amount);
+  }
+
+  if (deliveryChargeElement) {
+
+    if (currentDeliveryDistance === null) {
+      deliveryChargeElement.textContent =
+        "Check Location";
+
+    } else if (deliveryCharge === 0) {
+      deliveryChargeElement.textContent =
+        "FREE";
+
+    } else {
+      deliveryChargeElement.textContent =
+        formatPrice(deliveryCharge);
+    }
+
+  }
+
+  if (total) {
+    total.textContent =
+      formatPrice(finalTotal);
   }
 
   updateDetailCartCount();
-}
-
+               }
 
 
 /* ================= OPEN CART ================= */
