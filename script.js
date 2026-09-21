@@ -1103,7 +1103,7 @@ function renderCart() {
   if (subtotal) {
     subtotal.textContent =
       formatPrice(amount);
-  }
+  
 
   if (deliveryChargeElement) {
 
