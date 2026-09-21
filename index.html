@@ -711,85 +711,110 @@
       </div>
 
 
-      <div
-        id="cartSummary"
-        class="cart-summary"
-      >
+      <div id="cartSummary" class="cart-summary">
 
-        <div class="delivery-check-box">
-    <div class="delivery-check-title">
-        📍 Check Delivery Availability
+  <div class="cart-delivery-check">
+
+    <div class="cart-delivery-icon">
+      📍
     </div>
 
-    <p id="deliveryLocationMessage">
-        Check whether delivery is available at your location.
-    </p>
+    <div class="cart-delivery-content">
+
+      <strong>
+        Check delivery availability
+      </strong>
+
+      <p id="deliveryLocationMessage">
+        Check if we can deliver to your location.
+      </p>
+
+    </div>
 
     <button
-        id="checkDeliveryButton"
-        type="button"
-        onclick="checkDeliveryAvailability()"
+      id="checkDeliveryButton"
+      type="button"
+      onclick="checkDeliveryAvailability()"
     >
-        CHECK MY LOCATION
+      CHECK
     </button>
-</div>
 
-<div class="summary-row">
-    <span>Subtotal</span>
+  </div>
 
-    <strong id="cartSubtotal">
+
+  <div class="cart-price-breakdown">
+
+    <div class="cart-price-row">
+      <span>Subtotal</span>
+
+      <strong id="cartSubtotal">
         ₹0
-    </strong>
-</div>
-          <span>Subtotal</span>
-
-          <strong id="cartSubtotal">
-            ₹0
-          </strong>
-
-        </div>
+      </strong>
+    </div>
 
 
-        <div class="summary-row">
+    <div class="cart-price-row">
 
-          <span>Delivery</span>
+      <span>
+        Delivery
+      </span>
 
-          <strong>
-            Calculated at checkout
-          </strong>
-
-        </div>
-
-
-        <div class="free-delivery-note">
-          🎉 Orders above ₹500 get FREE delivery
-        </div>
-
-
-        <div class="summary-total">
-
-          <span>Total</span>
-
-          <strong id="cartTotal">
-            ₹0
-          </strong>
-
-        </div>
-
-
-        <button
-          class="checkout-button"
-          onclick="checkout()"
-          type="button"
-        >
-          Proceed to Checkout →
-        </button>
-
-      </div>
+      <strong
+        id="cartDeliveryCharge"
+        class="cart-delivery-charge"
+      >
+        Check location
+      </strong>
 
     </div>
 
   </div>
+
+
+  <div class="cart-free-delivery">
+
+    <span>🎉</span>
+
+    <div>
+      <strong>
+        Free delivery on ₹500+
+      </strong>
+
+      <p>
+        Available within 3 km
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="cart-total-box">
+
+    <div>
+
+      <span>
+        Total amount
+      </span>
+
+      <strong id="cartTotal">
+        ₹0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="checkout-button"
+    onclick="checkout()"
+    type="button"
+  >
+    Proceed to Checkout
+    <span>→</span>
+  </button>
+
+      </div>
 
 
   <!-- ================= FOOTER ================= -->
