@@ -963,22 +963,17 @@ function updateCartUI() {
 /* ================= RENDER CART ================= */
 
 function renderCart() {
-  const cartItems =
-    document.getElementById("cartItems");
+  const cartItems = document.getElementById("cartItems");
+  const emptyCart = document.getElementById("emptyCart");
+  const summary = document.getElementById("cartSummary");
 
-  const emptyCart =
-    document.getElementById("emptyCart");
-
-  const summary =
-    document.getElementById("cartSummary");
-
-  const subtotal =
+  const subtotalElement =
     document.getElementById("cartSubtotal");
 
   const deliveryChargeElement =
     document.getElementById("cartDeliveryCharge");
 
-  const total =
+  const totalElement =
     document.getElementById("cartTotal");
 
   if (!cartItems) {
@@ -986,6 +981,8 @@ function renderCart() {
   }
 
   const items = getCartItems();
+
+  /* ================= EMPTY CART ================= */
 
   if (items.length === 0) {
     cartItems.innerHTML = "";
@@ -1001,6 +998,8 @@ function renderCart() {
     return;
   }
 
+  /* ================= CART HAS ITEMS ================= */
+
   if (emptyCart) {
     emptyCart.style.display = "none";
   }
@@ -1009,88 +1008,88 @@ function renderCart() {
     summary.style.display = "block";
   }
 
-  cartItems.innerHTML =
-    items.map(item => {
+  cartItems.innerHTML = items.map(item => {
 
-      const image = item.image
-        ? `
-          <img
-            src="${item.image}"
-            alt="${item.name}"
-          >
-        `
-        : `
-          <span class="cart-placeholder">🛒</span>
-        `;
-
-      const itemTotal =
-        Number(item.price) *
-        Number(item.quantity);
-
-      return `
-        <div class="cart-item">
-
-          <div class="cart-item-image">
-            ${image}
-          </div>
-
-          <div class="cart-item-details">
-
-            <strong>${item.name}</strong>
-
-            <span>
-              ${item.unit || ""}
-            </span>
-
-            <div class="cart-item-price-row">
-
-              <b>
-                ${formatPrice(item.price)}
-              </b>
-
-              <span class="cart-item-total">
-                ${formatPrice(itemTotal)}
-              </span>
-
-            </div>
-
-            <div class="cart-quantity">
-
-              <button
-                type="button"
-                onclick="decreaseQuantity(${item.id})"
-              >
-                −
-              </button>
-
-              <span>
-                ${item.quantity}
-              </span>
-
-              <button
-                type="button"
-                onclick="increaseQuantity(${item.id})"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-          <button
-            class="remove-cart-item"
-            type="button"
-            onclick="removeFromCart(${item.id})"
-            aria-label="Remove ${item.name}"
-          >
-            ×
-          </button>
-
-        </div>
+    const image = item.image
+      ? `
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
+      `
+      : `
+        <span class="cart-placeholder">🛒</span>
       `;
 
-    }).join("");
+    const itemTotal =
+      Number(item.price) * Number(item.quantity);
+
+    return `
+      <div class="cart-item">
+
+        <div class="cart-item-image">
+          ${image}
+        </div>
+
+        <div class="cart-item-details">
+
+          <strong>${item.name}</strong>
+
+          <span>
+            ${item.unit || ""}
+          </span>
+
+          <div class="cart-item-price-row">
+
+            <b>
+              ${formatPrice(item.price)}
+            </b>
+
+            <span class="cart-item-total">
+              ${formatPrice(itemTotal)}
+            </span>
+
+          </div>
+
+          <div class="cart-quantity">
+
+            <button
+              type="button"
+              onclick="decreaseQuantity(${item.id})"
+            >
+              −
+            </button>
+
+            <span>
+              ${item.quantity}
+            </span>
+
+            <button
+              type="button"
+              onclick="increaseQuantity(${item.id})"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+        <button
+          class="remove-cart-item"
+          type="button"
+          onclick="removeFromCart(${item.id})"
+          aria-label="Remove ${item.name}"
+        >
+          ×
+        </button>
+
+      </div>
+    `;
+
+  }).join("");
+
+  /* ================= TOTALS ================= */
 
   const amount = getCartTotal();
 
@@ -1100,36 +1099,38 @@ function renderCart() {
   const finalTotal =
     amount + deliveryCharge;
 
-  if (subtotal) {
-    subtotal.textContent =
+  if (subtotalElement) {
+    subtotalElement.textContent =
       formatPrice(amount);
-  
+  }
 
   if (deliveryChargeElement) {
 
     if (currentDeliveryDistance === null) {
+
       deliveryChargeElement.textContent =
         "Check Location";
 
     } else if (deliveryCharge === 0) {
+
       deliveryChargeElement.textContent =
         "FREE";
 
     } else {
+
       deliveryChargeElement.textContent =
         formatPrice(deliveryCharge);
-    }
 
+    }
   }
 
-  if (total) {
-    total.textContent =
+  if (totalElement) {
+    totalElement.textContent =
       formatPrice(finalTotal);
   }
 
   updateDetailCartCount();
-               }
-
+}
 
 /* ================= OPEN CART ================= */
 
