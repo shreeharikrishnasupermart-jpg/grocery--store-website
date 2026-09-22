@@ -4046,3 +4046,37 @@ img {
     border-radius: 13px;
   }
      }
+/* =========================================================
+   PRODUCT DETAIL + BOTTOM CART VISIBILITY FIX
+   ========================================================= */
+
+.product-detail-page.open {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  background: #ffffff;
+  padding-bottom: 90px;
+}
+
+.bottom-cart {
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500 !important;
+}
+
+.product-detail-page.open ~ .bottom-cart:not([hidden]) {
+  display: flex !important;
+}
+
+@media (max-width: 700px) {
+  .product-detail-page.open {
+    padding-bottom: 82px;
+  }
+
+  .product-detail-page.open ~ .bottom-cart:not([hidden]) {
+    display: flex !important;
+  }
+}
