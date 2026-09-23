@@ -14,7 +14,85 @@ let currentDetailProductId = null;
 
 let currentDeliveryCharge = 0;
 let currentDeliveryDistance = null;
+/* ================= GOOGLE SHEET PRODUCTS ================= */
 
+const GOOGLE_SHEET_ID =
+  "1bjYs8h44yAfE0nMmolVgfpH8r5eThuV8a3R8jqDpAvI";
+
+const GOOGLE_SHEET_CSV_URL =
+  `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv`;
+
+async function loadProductsFromGoogleSheet() {
+  try {
+    const response = await fetch(GOOGLE_SHEET_CSV_URL);
+
+    if (!response.ok) {
+      throw new Error("Google Sheet could not be loaded");
+    }
+
+    const csvText = await response.text();
+
+    const rows = csvText
+      .trim()
+      .split(/\r?\n/)
+      .map(row => row.split(","));
+
+    if (rows.length < 2) {
+      console.warn("No products found in Google Sheet.");
+      return;
+    }
+
+    const headers = rows[0].map(header =>
+      header.trim().toLowerCase()
+    );
+
+    const sheetProducts = rows
+      .slice(1)
+      .map(row => {
+        const product = {};
+
+        headers.forEach((header, index) => {
+          product[header] =
+            row[index] ? row[index].trim() : "";
+        });
+
+        return product;
+      })
+      .filter(product =>
+        product.id &&
+        product.name
+      )
+      .map(product => ({
+        id: Number(product.id),
+        name: product.name,
+        category: product.category || "grocery",
+        brand: product.brand || "",
+        unit: product.unit || "",
+        price: Number(product.price) || 0,
+        mrp: Number(product.mrp) || 0,
+        stock: Number(product.stock) || 0,
+        image: product.image || "",
+        discount: 0,
+        description:
+          `${product.name} available at Shree Harikrishna Supermart.`
+      }));
+
+    if (sheetProducts.length > 0) {
+      products = sheetProducts;
+      console.log(
+        `Loaded ${products.length} products from Google Sheet.`
+      );
+
+      refreshWebsite();
+    }
+
+  } catch (error) {
+    console.error(
+      "Google Sheet loading error:",
+      error
+    );
+  }
+}
 /* ================= LOAD CART ================= */
 
 try {
