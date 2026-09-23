@@ -93,6 +93,7 @@ async function loadProductsFromGoogleSheet() {
     );
   }
 }
+loadProductsFromGoogleSheet();
 /* ================= LOAD CART ================= */
 
 try {
