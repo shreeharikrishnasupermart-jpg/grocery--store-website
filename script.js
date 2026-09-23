@@ -1675,4 +1675,5 @@ currentDeliveryCharge = quote.available ? quote.charge : 0;
 document.addEventListener("DOMContentLoaded", function () {
   renderProducts();
   updateCartUI();
+  loadProductsFromGoogleSheet();
 });
