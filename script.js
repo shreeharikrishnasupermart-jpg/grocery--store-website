@@ -25,7 +25,7 @@ const GOOGLE_SHEET_CSV_URL =
 async function loadProductsFromGoogleSheet() {
   try {
     const response = await fetch(GOOGLE_SHEET_CSV_URL);
-
+    console.log("Google Sheet fetch started");
     if (!response.ok) {
       throw new Error("Google Sheet could not be loaded");
     }
