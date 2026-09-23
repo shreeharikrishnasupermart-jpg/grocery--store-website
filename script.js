@@ -25,7 +25,7 @@ const GOOGLE_SHEET_CSV_URL =
 async function loadProductsFromGoogleSheet() {
   try {
     const response = await fetch(GOOGLE_SHEET_CSV_URL);
-    console.log("Google Sheet fetch started");
+
     if (!response.ok) {
       throw new Error("Google Sheet could not be loaded");
     }
@@ -37,8 +37,7 @@ async function loadProductsFromGoogleSheet() {
       .split(/\r?\n/);
 
     if (lines.length < 2) {
-      console.warn("No products found in Google Sheet.");
-      return;
+      throw new Error("No products found in Google Sheet");
     }
 
     const headers = lines[0]
@@ -58,10 +57,7 @@ async function loadProductsFromGoogleSheet() {
 
         return product;
       })
-      .filter(product =>
-        product.id &&
-        product.name
-      )
+      .filter(product => product.id && product.name)
       .map(product => ({
         id: Number(product.id),
         name: product.name,
@@ -80,21 +76,14 @@ async function loadProductsFromGoogleSheet() {
     if (sheetProducts.length > 0) {
       products = sheetProducts;
 
-      console.log(
-        "Google Sheet products loaded:",
-        products.length
-      );
+      console.log("Google Sheet loaded:", products);
 
       renderProducts();
-      renderCategoryProducts();
       updateCartUI();
     }
 
   } catch (error) {
-    console.error(
-      "Google Sheet loading error:",
-      error
-    );
+    console.error("Google Sheet error:", error);
   }
 }
 /* ================= LOAD CART ================= */
