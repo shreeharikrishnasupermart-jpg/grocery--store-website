@@ -32,28 +32,28 @@ async function loadProductsFromGoogleSheet() {
 
     const csvText = await response.text();
 
-    const rows = csvText
+    const lines = csvText
       .trim()
-      .split(/\r?\n/)
-      .map(row => row.split(","));
+      .split(/\r?\n/);
 
-    if (rows.length < 2) {
+    if (lines.length < 2) {
       console.warn("No products found in Google Sheet.");
       return;
     }
 
-    const headers = rows[0].map(header =>
-      header.trim().toLowerCase()
-    );
+    const headers = lines[0]
+      .split(",")
+      .map(header => header.trim().toLowerCase());
 
-    const sheetProducts = rows
+    const sheetProducts = lines
       .slice(1)
-      .map(row => {
+      .map(line => {
+        const values = line.split(",");
         const product = {};
 
         headers.forEach((header, index) => {
           product[header] =
-            row[index] ? row[index].trim() : "";
+            (values[index] || "").trim();
         });
 
         return product;
@@ -65,7 +65,7 @@ async function loadProductsFromGoogleSheet() {
       .map(product => ({
         id: Number(product.id),
         name: product.name,
-        category: product.category || "grocery",
+        category: String(product.category || "grocery").toLowerCase(),
         brand: product.brand || "",
         unit: product.unit || "",
         price: Number(product.price) || 0,
@@ -79,11 +79,15 @@ async function loadProductsFromGoogleSheet() {
 
     if (sheetProducts.length > 0) {
       products = sheetProducts;
+
       console.log(
-        `Loaded ${products.length} products from Google Sheet.`
+        "Google Sheet products loaded:",
+        products.length
       );
 
-      refreshWebsite();
+      renderProducts();
+      renderCategoryProducts();
+      updateCartUI();
     }
 
   } catch (error) {
@@ -93,7 +97,6 @@ async function loadProductsFromGoogleSheet() {
     );
   }
 }
-loadProductsFromGoogleSheet();
 /* ================= LOAD CART ================= */
 
 try {
