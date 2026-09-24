@@ -74,7 +74,7 @@ async function loadProductsFromGoogleSheet() {
       }));
 
     if (sheetProducts.length > 0) {
-      products = sheetProducts;
+      window.products = sheetProducts;
 
       console.log("Google Sheet loaded:", products);
 
