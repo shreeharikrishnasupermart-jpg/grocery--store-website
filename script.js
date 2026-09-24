@@ -1599,7 +1599,9 @@ document.addEventListener("keydown", event => {
 
 /* ================= START ================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadProductsFromGoogleSheet();
+
   renderProducts();
   renderCart();
   updateCartUI();
@@ -1664,8 +1666,3 @@ currentDeliveryCharge = quote.available ? quote.charge : 0;
     button.disabled = false;
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  renderProducts();
-  updateCartUI();
-  loadProductsFromGoogleSheet();
-});
